@@ -1,9 +1,8 @@
 import React, { Component } from 'react';
 import './Login.css';
-// import { withStyles } from '@material-ui/core/styles';
+import { withStyles } from '@material-ui/core/styles';
 import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
-import Input from '@material-ui/core/Input';
 
 class Login extends Component {
     constructor(props) {
@@ -51,9 +50,10 @@ class Login extends Component {
                             type="password"
                             fullWidth={true}
                         />
-                        <Button variant="outlined">
+                        <Button classes={{ root: 'login-button' }} variant="outlined">
                             Sign in
                         </Button>
+                        
                     </form>
                 </div>
             </div>
