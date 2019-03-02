@@ -25,6 +25,7 @@
 
 button.login-button {
     margin-top: 15px;
+    margin-bottom: 10px;
     border-color: white;
     color: white;
 }
@@ -49,7 +50,12 @@ button.login-button {
     color: white;
 }
 
-div.MuiFilledInput-underline-24:after {
+#login-panel > form > div:nth-child(1) > div:after {
     border-bottom: 2px solid white;
+
 }
 
+#login-panel > form > div:nth-child(2) > div:after {
+    border-bottom: 2px solid white;
+
+}

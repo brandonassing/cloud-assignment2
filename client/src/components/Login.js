@@ -1,14 +1,9 @@
 import React, { Component } from 'react';
 import './Login.css';
-import { withStyles } from '@material-ui/core/styles';
 import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
+import { Link } from 'react-router-dom';
 
-const styles = theme => ({
-    multilineColor:{
-        color:'red'
-    }
-});
 class Login extends Component {
     constructor(props) {
         super(props);
@@ -67,9 +62,12 @@ class Login extends Component {
                             //     className: "input-label"
                             // }}
                         />
-                        <Button classes={{ root: 'login-button' }} variant="outlined">
-                            Sign in
-                        </Button>
+                        <Link to="/" style={{ textDecoration: 'none' }}>
+                            <Button classes={{ root: 'login-button' }} variant="outlined">
+                                Sign in
+                            </Button>
+                        </Link>
+                        
                         
                     </form>
                 </div>
