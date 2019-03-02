@@ -1,10 +1,10 @@
 #login-body {
     width: 100vw;
     min-height: 100vh;
-    background: #159957;  /* fallback for old browsers */
-    background: -webkit-linear-gradient(to right, #155799, #159957);  /* Chrome 10-25, Safari 5.1-6 */
-    background: linear-gradient(to right, #155799, #159957); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
-    
+    background: #0F2027;  /* fallback for old browsers */
+    background: -webkit-linear-gradient(to left, #2C5364, #203A43, #0F2027);  /* Chrome 10-25, Safari 5.1-6 */
+    background: linear-gradient(to left, #2C5364, #203A43, #0F2027); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+        
     overflow:hidden;
     display: flex;
     justify-content: center;
@@ -12,8 +12,7 @@
 }
 
 #login-panel {
-    background-color: transparent;
-    border: 3px solid white;
+    background-color: rgba(0, 0, 0, 0.2);
     border-radius: 10px;
     width: 30vw;
     padding-top: 10px;
@@ -29,3 +28,28 @@ button.login-button {
     border-color: white;
     color: white;
 }
+
+#filled-username {
+    color: white;
+}
+
+#filled-password {
+    color: white;
+}
+
+/* label.input-label {
+    color: white;
+} */
+
+#login-panel > form > div:nth-child(1) > label {
+    color: white;
+}
+
+#login-panel > form > div:nth-child(2) > label {
+    color: white;
+}
+
+div.MuiFilledInput-underline-24:after {
+    border-bottom: 2px solid white;
+}
+

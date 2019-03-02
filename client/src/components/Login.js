@@ -4,6 +4,11 @@ import { withStyles } from '@material-ui/core/styles';
 import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
 
+const styles = theme => ({
+    multilineColor:{
+        color:'red'
+    }
+});
 class Login extends Component {
     constructor(props) {
         super(props);
@@ -28,7 +33,7 @@ class Login extends Component {
         return (
             <div id="login-body">
                 <div id="login-panel">
-                    <h2>Veeeeem</h2>
+                    <h2>Vee Em</h2>
                     <form noValidate autoComplete="off">
                         <TextField
                             id="filled-username"
@@ -39,6 +44,12 @@ class Login extends Component {
                             variant="filled"
                             type="text"
                             fullWidth={true}
+                            InputProps={{
+                                
+                            }}
+                            // InputLabelProps={{
+                            //     className: "input-label"
+                            // }}
                         />
                         <TextField
                             id="filled-password"
@@ -49,6 +60,12 @@ class Login extends Component {
                             variant="filled"
                             type="password"
                             fullWidth={true}
+                            InputProps={{
+                                
+                            }}
+                            // InputLabelProps={{
+                            //     className: "input-label"
+                            // }}
                         />
                         <Button classes={{ root: 'login-button' }} variant="outlined">
                             Sign in
