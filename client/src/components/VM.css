@@ -1,9 +1,53 @@
 .vm-body {
-    height: 200px;
+    /* height: 200px; */
     width: 80%;
-    background-color: white;
-    margin-top: 20px;
-    margin-bottom: 20px;
-    border-radius: 12px;
+    background-color: rgb(23, 39, 45);
+    margin-top: 10px;
+    margin-bottom: 10px;
+    border-radius: 10px;
     padding: 25px;
+    color: rgb(208, 208, 208);
+}
+
+.vm-title {
+    margin-top: 0;
+}
+
+.usage-group {
+    display: flex;
+    margin-bottom: 16px;
+    justify-content: space-between;
+}
+
+.usage-group > p {
+    margin: 0;
+}
+
+.refresh-button {
+    background-color: transparent;
+    border: none;
+    color: rgb(208, 208, 208);
+    /* height: 15px; */
+    font-size: 15px;
+    cursor: pointer;
+    outline: none;
+}
+
+.vm-button-group {
+    display: flex;
+    justify-content: space-between;
+}
+
+button.vm-button {
+    width: 48%;
+    color: white;
+    border: none;
+}
+
+button.vm-button.start-button {
+    background-color: rgb(15, 196, 178);
+}
+
+button.vm-button.delete-button {
+    background-color: rgb(182, 11, 11);
 }

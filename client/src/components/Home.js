@@ -6,7 +6,46 @@ import VM from './VM';
 
 
 class Home extends Component {
+    constructor(props) {
+        super(props);
+        this.state = {
+            vms: [{
+                name: "My VM 1",
+                startTime: new Date('October 20, 2018 9:24:00'),
 
+            },
+            {
+                name: "VM2",
+                startTime: new Date('November 12, 2018 19:23:21'),
+                
+            },
+            {
+                name: "Something vm 3",
+                startTime: new Date('January 28, 2019 12:00:39'),
+                
+            },
+            {
+                name: "My VM 4",
+                startTime: new Date('March 1, 2019 13:24:00'),
+                
+            },
+            {
+                name: "My VM 5",
+                startTime: new Date('March 1, 2019 13:24:00'),
+                
+            },
+            {
+                name: "My VM 6",
+                startTime: new Date('March 1, 2019 13:24:00'),
+                
+            },
+            {
+                name: "My VM 7",
+                startTime: new Date('March 1, 2019 13:24:00'),
+                
+            }]
+        }
+    }
     render() {
         return (
             <div id="home-body">
@@ -24,20 +63,20 @@ class Home extends Component {
                 </nav>
                 <div id="home-main">
                     <div id="vm-create" className="vm-body">
-                        <h2>
+                        <h2 id="plus-symbol">
                             +
                         </h2>
-                        <h2>
+                        <h2 id="create-text">
                             Create new VM
                         </h2>
                     </div>
-                    <VM />
-                    <VM />
-                    <VM />
-                    <VM />
-                    <VM />
-                    <VM />
-                    <VM />
+                    {
+                        this.state.vms.map((item) => {
+                            return(
+                                <VM key={item.name} name={item.name} startTime={item.startTime} />
+                            )
+                        })
+                    }
 
                 </div>
             </div>

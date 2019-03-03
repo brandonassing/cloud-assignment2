@@ -1,10 +1,11 @@
 #home-body {
     min-height: 100vh;
-    background-color: #25353B;
+    background-color: #0F2027;
 }
 
 #nav-wrapper {
     background-color: #18282F;
+
     display: flex;
     padding-left: 100px;
     padding-right: 100px;
@@ -18,10 +19,8 @@
 }
 
 button.logout-button {
-    /* float: right; */
     border-color: white;
     color: white;
-
 } 
 
 #nav-heading {
@@ -44,5 +43,21 @@ button.logout-button {
 
 #vm-create {
     text-align: center;
-    color: grey;
+    color: rgb(208, 208, 208);
+    cursor: pointer;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+#plus-symbol {
+    font-size: 50px;
+    margin: 0;
+
+}
+
+#create-text {
+    font-size: 17px;
+    margin: 0;
+    margin-bottom: 20px;
 }
