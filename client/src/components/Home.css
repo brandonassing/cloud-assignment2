@@ -1,0 +1,27 @@
+#nav-wrapper {
+    background-color: #18282F;
+    display: flex;
+    padding-left: 100px;
+    padding-right: 100px;
+}
+
+#logout-button-wrapper {
+    margin-top: 10px;
+    margin-bottom: 10px;
+    margin-left: auto;
+    /* margin-right: 20px; */
+}
+
+button.logout-button {
+    /* float: right; */
+    border-color: white;
+    color: white;
+
+} 
+
+#nav-heading {
+    padding: 10px;
+    margin: 0;
+    /* margin-left: 20px; */
+    color: white;
+}

@@ -28,7 +28,7 @@ class Login extends Component {
         return (
             <div id="login-body">
                 <div id="login-panel">
-                    <h2>Vee Em</h2>
+                    <h2>vee em.</h2>
                     <form noValidate autoComplete="off">
                         <TextField
                             id="filled-username"
