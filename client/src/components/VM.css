@@ -1,0 +1,9 @@
+.vm-body {
+    height: 200px;
+    width: 80%;
+    background-color: white;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    border-radius: 12px;
+    padding: 25px;
+}

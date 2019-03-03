@@ -1,3 +1,8 @@
+#home-body {
+    min-height: 100vh;
+    background-color: #25353B;
+}
+
 #nav-wrapper {
     background-color: #18282F;
     display: flex;
@@ -22,6 +27,22 @@ button.logout-button {
 #nav-heading {
     padding: 10px;
     margin: 0;
-    /* margin-left: 20px; */
     color: white;
+}
+
+
+#home-main {
+    padding-left: 200px;
+    padding-right: 200px;
+    padding-top: 30px;
+    padding-bottom: 50px;
+    
+    display: grid;
+    grid-template-columns: 33.3333% 33.3333% 33.3333%;
+  
+}
+
+#vm-create {
+    text-align: center;
+    color: grey;
 }
