@@ -8,7 +8,7 @@ import Modal from '@material-ui/core/Modal';
 import TextField from '@material-ui/core/TextField';
 import Menu from '@material-ui/core/Menu';
 import MenuItem from '@material-ui/core/MenuItem';
-
+import moment from 'moment';
 
 class Home extends Component {
     constructor(props) {
@@ -18,57 +18,106 @@ class Home extends Component {
             anchorEl: null,
             vmName: "",
             vmTier: 0,
+            charges: 0.00,
             vms: [{
                 _id: "1234",
                 name: "My VM 1",
                 creationDate: new Date('October 20, 2018 9:24:00'),
                 tier: 1,
-                running: true
+                running: true,
+                usage: [{
+                    startTime: new Date('October 20, 2018 10:24:00'),
+                    endTime: new Date('October 20, 2018 14:28:00')
+                }, {
+                    startTime: new Date('March 4, 2019 12:24:00'),
+                    endTime: null
+                }]
             },
             {
                 _id: "1235",
                 name: "VM2",
                 creationDate: new Date('November 12, 2018 19:23:21'),
                 tier: 3,
-                running: false
+                running: false,
+                usage: [{
+                    startTime: new Date('October 20, 2018 10:24:00'),
+                    endTime: new Date('October 20, 2018 14:28:00')
+                }, {
+                    startTime: new Date('October 23, 2018 12:24:00'),
+                    endTime: new Date('October 25, 2018 14:28:00')
+                }]
             },
             {
                 _id: "1236",
                 name: "Something vm 3",
                 creationDate: new Date('January 28, 2019 12:00:39'),
                 tier: 2,
-                running: true
+                running: true,
+                usage: [{
+                    startTime: new Date('March 2, 2019 11:39:23'),
+                    endTime: null
+                }]
             },
             {
                 _id: "1237",
                 name: "My VM 4",
                 creationDate: new Date('March 1, 2019 13:24:00'),
                 tier: 1,
-                running: false
+                running: false,
+                usage: []
             },
             {
                 _id: "1238",
                 name: "My VM 5",
                 creationDate: new Date('March 1, 2019 13:24:00'),
                 tier: 1,
-                running: true
+                running: false,
+                usage: []
             },
             {
                 _id: "1239",
                 name: "My VM 6",
                 creationDate: new Date('March 1, 2019 13:24:00'),
                 tier: 2,
-                running: true
+                running: false,
+                usage: []
             },
             {
                 _id: "1240",
                 name: "My VM 7",
                 creationDate: new Date('March 1, 2019 13:24:00'),
                 tier: 3,
-                running: false
+                running: false,
+                usage: []
             }]
         }
     }
+
+    componentDidMount() {
+        
+        this.refresh();
+    }
+
+    refresh = () => {
+        if (this.state.vms.length !== 0) {
+            let charges = 0.00;
+            this.state.vms.forEach((vm) => {
+                let vmCharge = 0.00;
+                let tier = vm.tier;
+                if (vm.usage.length !== 0) {
+                    vm.usage.forEach((use) => {
+                        let endTime = use.endTime !== null ? use.endTime : Date.now();
+                        let duration = moment.duration(moment(endTime).diff(moment(use.startTime))).asMinutes();
+                        vmCharge += duration * (tier === 1 ? 0.05 : (tier === 2 ? 0.1 : 0.15));
+                    });
+                }
+                charges += vmCharge;
+            });
+            this.setState({
+                charges: Math.round(charges*100)/100
+            });
+        }
+    };
 
     handleNameChange = (e) => {
         this.setState({
@@ -129,6 +178,7 @@ class Home extends Component {
     };
 
     render() {
+        // TODO only show VM for user that created
         let tierDescription;
         if (this.state.vmTier === 1) {
             tierDescription = (
@@ -166,6 +216,7 @@ class Home extends Component {
                     <div id="nav-wrapper">
                         <h1 id="nav-heading">vee em.</h1>
                         <div id="logout-button-wrapper">
+                            <button id="refresh-button-main" className="refresh-button" onClick={this.refresh}>refresh</button>
                             <Link to="/login" style={{ textDecoration: 'none' }}>
                                 <Button classes={{ root: 'logout-button' }} variant="outlined">
                                     Logout
@@ -175,7 +226,7 @@ class Home extends Component {
                     </div>
                 </nav>
                 <div id="home-main">
-                    <Usage />
+                    <Usage charges={this.state.charges} />
                     <div id="home-grid">
                         {/* <div id="create-button-container" className="vm-body">
                         <Button classes={{ root: 'create-button' }}>
@@ -200,7 +251,7 @@ class Home extends Component {
                         {
                             this.state.vms.map((item) => {
                                 return (
-                                    <VM key={item._id} _id={item._id} name={item.name} creationDate={item.creationDate} tier={item.tier} running={item.running} startStop={this.startStop} delete={this.delete} upgrade={this.upgrade} downgrade={this.downgrade} />
+                                    <VM key={item._id} _id={item._id} name={item.name} creationDate={item.creationDate} tier={item.tier} running={item.running} usage={item.usage} startStop={this.startStop} delete={this.delete} upgrade={this.upgrade} downgrade={this.downgrade} />
                                 )
                             })
                         }

@@ -11,6 +11,10 @@
     padding-right: 100px;
 }
 
+#refresh-button-main {
+    margin-right: 20px;
+}
+
 #logout-button-wrapper {
     margin-top: 10px;
     margin-bottom: 10px;
