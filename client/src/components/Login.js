@@ -12,6 +12,11 @@ class Login extends Component {
             password: ""
         }
     }
+
+    validateForm() {
+        return this.state.username.length > 0 && this.state.password.length > 0;
+    }
+
     handleUsernameChange = e => {
         e.preventDefault();
         this.setState({
@@ -63,7 +68,10 @@ class Login extends Component {
                             // }}
                         />
                         <Link to="/" style={{ textDecoration: 'none' }}>
-                            <Button classes={{ root: 'login-button' }} variant="outlined">
+                            <Button 
+                            classes={{ root: 'login-button' }} 
+                            variant="outlined"
+                            disabled={!this.validateForm()}>
                                 Sign in
                             </Button>
                         </Link>
