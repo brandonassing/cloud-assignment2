@@ -61,7 +61,6 @@ class VM extends Component {
     };
 
     render() {
-        // TODO have up/downgrade buttons and disable if highest/lowest tier
         // TODO disable scale if running
         const { _id, name, creationDate, tier, running, usage } = this.props;
 
@@ -113,10 +112,10 @@ class VM extends Component {
                 <p><strong>Creation time:</strong> {moment(creationDate).format("DD MMMM YYYY, h:mm:ss a")}</p>
                 <div className="usage-group"><p><strong>Charge per VM:</strong> $ {this.state.charges}</p><button className="refresh-button" onClick={this.refresh}>refresh</button></div>
                 <div id="vm-upgrade-group" className="vm-button-group">
-                    <Button classes={{ root: 'vm-button upgrade-button' }} onClick={this.handleDowngrade} disabled={running}>
+                    <Button classes={{ root: 'vm-button upgrade-button' }} onClick={this.handleDowngrade} disabled={running || tier === 1}>
                         Downgrade
                     </Button>
-                    <Button classes={{ root: 'vm-button upgrade-button' }} onClick={this.handleUpgrade} disabled={running}>
+                    <Button classes={{ root: 'vm-button upgrade-button' }} onClick={this.handleUpgrade} disabled={running || tier === 3}>
                         Upgrade
                     </Button>
                 </div>
