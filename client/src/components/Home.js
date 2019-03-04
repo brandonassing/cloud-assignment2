@@ -3,6 +3,7 @@ import './Home.css';
 import Button from '@material-ui/core/Button';
 import { Link } from 'react-router-dom';
 import VM from './VM';
+import Usage from './Usage';
 import Modal from '@material-ui/core/Modal';
 import TextField from '@material-ui/core/TextField';
 import Menu from '@material-ui/core/Menu';
@@ -20,49 +21,49 @@ class Home extends Component {
             vms: [{
                 _id: "1234",
                 name: "My VM 1",
-                startTime: new Date('October 20, 2018 9:24:00'),
+                creationDate: new Date('October 20, 2018 9:24:00'),
                 tier: 1,
                 running: true
             },
             {
                 _id: "1235",
                 name: "VM2",
-                startTime: new Date('November 12, 2018 19:23:21'),
+                creationDate: new Date('November 12, 2018 19:23:21'),
                 tier: 3,
                 running: false
             },
             {
                 _id: "1236",
                 name: "Something vm 3",
-                startTime: new Date('January 28, 2019 12:00:39'),
+                creationDate: new Date('January 28, 2019 12:00:39'),
                 tier: 2,
                 running: true
             },
             {
                 _id: "1237",
                 name: "My VM 4",
-                startTime: new Date('March 1, 2019 13:24:00'),
+                creationDate: new Date('March 1, 2019 13:24:00'),
                 tier: 1,
                 running: false
             },
             {
                 _id: "1238",
                 name: "My VM 5",
-                startTime: new Date('March 1, 2019 13:24:00'),
+                creationDate: new Date('March 1, 2019 13:24:00'),
                 tier: 1,
                 running: true
             },
             {
                 _id: "1239",
                 name: "My VM 6",
-                startTime: new Date('March 1, 2019 13:24:00'),
+                creationDate: new Date('March 1, 2019 13:24:00'),
                 tier: 2,
                 running: true
             },
             {
                 _id: "1240",
                 name: "My VM 7",
-                startTime: new Date('March 1, 2019 13:24:00'),
+                creationDate: new Date('March 1, 2019 13:24:00'),
                 tier: 3,
                 running: false
             }]
@@ -174,7 +175,9 @@ class Home extends Component {
                     </div>
                 </nav>
                 <div id="home-main">
-                    {/* <div id="create-button-container" className="vm-body">
+                    <Usage />
+                    <div id="home-grid">
+                        {/* <div id="create-button-container" className="vm-body">
                         <Button classes={{ root: 'create-button' }}>
                             <div id="vm-create">
                                 <h2 id="plus-symbol">
@@ -186,22 +189,22 @@ class Home extends Component {
                             </div>
                         </Button>
                     </div> */}
-                    <div id="vm-create" className="vm-body" onClick={this.handleOpen}>
-                        <h2 id="plus-symbol">
-                            +
+                        <div id="vm-create" className="vm-body" onClick={this.handleOpen}>
+                            <h2 id="plus-symbol">
+                                +
                         </h2>
-                        <h2 id="create-text">
-                            Create new VM
+                            <h2 id="create-text">
+                                Create new VM
                         </h2>
+                        </div>
+                        {
+                            this.state.vms.map((item) => {
+                                return (
+                                    <VM key={item._id} _id={item._id} name={item.name} creationDate={item.creationDate} tier={item.tier} running={item.running} startStop={this.startStop} delete={this.delete} upgrade={this.upgrade} downgrade={this.downgrade} />
+                                )
+                            })
+                        }
                     </div>
-                    {
-                        this.state.vms.map((item) => {
-                            return (
-                                <VM key={item._id} _id={item._id} name={item.name} startTime={item.startTime} tier={item.tier} running={item.running} startStop={this.startStop} delete={this.delete} upgrade={this.upgrade} downgrade={this.downgrade} />
-                            )
-                        })
-                    }
-
                 </div>
                 <Modal
                     aria-labelledby="simple-modal-title"

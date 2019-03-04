@@ -1,0 +1,17 @@
+#usage-body {
+    /* quick fix, should prob find another way to size this */
+    width: 93.5%;
+    background-color: rgb(23, 39, 45);
+    margin-top: 10px;
+    margin-bottom: 10px;
+    border-radius: 10px;
+    padding: 25px;
+    text-align: center;
+}
+#usage-body > h2 {
+    color: rgb(150, 150, 150);
+}
+
+#usage-body > h2 > span {
+    color: white;
+}

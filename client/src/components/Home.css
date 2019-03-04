@@ -29,16 +29,18 @@ button.logout-button {
     color: white;
 }
 
-
 #home-main {
     padding-left: 200px;
     padding-right: 200px;
     padding-top: 30px;
     padding-bottom: 50px;
-    
+  
+}
+
+#home-grid {
     display: grid;
     grid-template-columns: 33.3333% 33.3333% 33.3333%;
-  
+    /* column-gap: 20px; */
 }
 
 #vm-create {

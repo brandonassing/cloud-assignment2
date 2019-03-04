@@ -1,5 +1,4 @@
 .vm-body {
-    /* height: 200px; */
     width: 80%;
     background-color: rgb(23, 39, 45);
     margin-top: 10px;
@@ -99,4 +98,10 @@ hr {
     height: 1px;
     border: none;
     background-color: rgb(171, 171, 171);
+}
+
+#details-modal-content > h2 > span {
+    font-weight: lighter;
+    font-size: 20px;
+
 }

@@ -40,9 +40,13 @@ class VM extends Component {
         this.props.delete(this.props._id);
     };
 
+    refresh = () => {
+
+    };
+
     render() {
         // TODO have up/downgrade buttons and disable if highest/lowest tier
-        const { _id, name, startTime, tier, running } = this.props;
+        const { _id, name, creationDate, tier, running } = this.props;
 
         let vmMetadata = (
             <div>
@@ -89,8 +93,8 @@ class VM extends Component {
             <div className="vm-body">
                 <h2 className="vm-title">{name} <span>- {tier === 1 ? "Basic" : (tier === 2 ? "Large" : "Ultra-large")}</span></h2>
                 <button className="details-button" onClick={() => this.setState({ detailsOpen: true })}>more details</button>
-                <p><strong>Start time:</strong> {moment(startTime).format("DD MMMM YYYY, h:mm:ss a")}</p>
-                <div className="usage-group"><p><strong>Usage:</strong> 50%</p><button className="refresh-button">refresh</button></div>
+                <p><strong>Creation time:</strong> {moment(creationDate).format("DD MMMM YYYY, h:mm:ss a")}</p>
+                <div className="usage-group"><p><strong>Usage:</strong> 50%</p><button className="refresh-button" onClick={this.refresh}>refresh</button></div>
                 <div className="vm-button-group">
                     <Button classes={{ root: 'vm-button start-button' }} onClick={this.handleStartStop}>
                         {!running ? "Start" : "Stop"}
@@ -107,7 +111,7 @@ class VM extends Component {
                 >
                     <div id="details-modal-body">
                         <div id="details-modal-content">
-                            <h2>{name} details</h2>
+                            <h2>{name} <span>details</span></h2>
                             {
                                 tier !== 0 ? (
                                     <div id="vm-description">
