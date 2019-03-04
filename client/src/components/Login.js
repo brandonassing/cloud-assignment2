@@ -29,12 +29,19 @@ class Login extends Component {
             password: e.target.value
         });
     }
+
+    handleSubmit = () => {
+        this.props.loggedIn(true)
+    }
+    
     render() {
         return (
             <div id="login-body">
                 <div id="login-panel">
                     <h2>vee em.</h2>
-                    <form noValidate autoComplete="off">
+                    <form 
+                    noValidate autoComplete="off"
+                    onSubmit={this.handleSubmit}>
                         <TextField
                             id="filled-username"
                             label="Username"
@@ -71,12 +78,11 @@ class Login extends Component {
                             <Button 
                             classes={{ root: 'login-button' }} 
                             variant="outlined"
-                            disabled={!this.validateForm()}>
+                            disabled={!this.validateForm()}
+                            onClick={this.handleSubmit}>
                                 Sign in
                             </Button>
                         </Link>
-                        
-                        
                     </form>
                 </div>
             </div>
