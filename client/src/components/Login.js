@@ -12,6 +12,11 @@ class Login extends Component {
             password: ""
         }
     }
+
+    validateForm() {
+        return this.state.username.length > 0 && this.state.password.length > 0;
+    }
+
     handleUsernameChange = e => {
         e.preventDefault();
         this.setState({
@@ -24,12 +29,20 @@ class Login extends Component {
             password: e.target.value
         });
     }
+
+    handleSubmit = () => {
+        this.props.loggedIn(true)
+    }
+    
     render() {
         return (
             <div id="login-body">
                 <div id="login-panel">
                     <h2>vee em<span>.</span></h2>
-                    <form noValidate autoComplete="off">
+                    <form 
+                    noValidate autoComplete="off"
+                    onSubmit={this.handleSubmit}>
+
                         <TextField
                             id="filled-username"
                             label="Username"
@@ -63,12 +76,14 @@ class Login extends Component {
                             // }}
                         />
                         <Link to="/" style={{ textDecoration: 'none' }}>
-                            <Button classes={{ root: 'login-button' }} variant="outlined">
+                            <Button 
+                            classes={{ root: 'login-button' }} 
+                            variant="outlined"
+                            disabled={!this.validateForm()}
+                            onClick={this.handleSubmit}>
                                 Sign in
                             </Button>
                         </Link>
-                        
-                        
                     </form>
                 </div>
             </div>

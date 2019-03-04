@@ -159,6 +159,10 @@ class Home extends Component {
         });
     };
 
+    handleLogout = () => {
+        this.props.loggedIn(false)
+    }
+
     createVM = () => {
         this.setState({
             createOpen: false,
@@ -230,7 +234,7 @@ class Home extends Component {
                             <button id="refresh-button-main" className="refresh-button" onClick={this.refresh}>refresh</button>
                             <h3 id="username"><span>user: </span>{this.state.loggedInUser}</h3>
                             <Link to="/login" style={{ textDecoration: 'none' }}>
-                                <Button classes={{ root: 'logout-button' }} variant="outlined">
+                                <Button classes={{ root: 'logout-button' }} variant="outlined" onClick={this.handleLogout}>
                                     Logout
                                 </Button>
                             </Link>
