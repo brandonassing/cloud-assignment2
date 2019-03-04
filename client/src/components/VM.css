@@ -6,11 +6,19 @@
     margin-bottom: 10px;
     border-radius: 10px;
     padding: 25px;
+    color: rgb(150, 150, 150);
+}
+
+.vm-body > h2 {
     color: rgb(208, 208, 208);
 }
 
 .vm-title {
     margin-top: 0;
+}
+
+.vm-title > span {
+    font-weight: lighter;
 }
 
 .usage-group {
