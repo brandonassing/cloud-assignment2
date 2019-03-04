@@ -233,11 +233,11 @@ class Home extends Component {
                         <div id="logout-button-wrapper">
                             <button id="refresh-button-main" className="refresh-button" onClick={this.refresh}>refresh</button>
                             <h3 id="username"><span>user: </span>{this.state.loggedInUser}</h3>
-                            <Link to="/login" style={{ textDecoration: 'none' }}>
+                            {/* <Link to="/login" style={{ textDecoration: 'none' }}> */}
                                 <Button classes={{ root: 'logout-button' }} variant="outlined" onClick={this.handleLogout}>
                                     Logout
                                 </Button>
-                            </Link>
+                            {/* </Link> */}
                         </div>
                     </div>
                 </nav>

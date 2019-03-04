@@ -81,7 +81,7 @@ class Login extends Component {
                             // }}
                         />
                         {/* TODO can still click on text in button */}
-                        <Link to="/" style={{ textDecoration: 'none' }}>
+                        {/* <Link to="/" style={{ textDecoration: 'none' }}> */}
                             <Button 
                             classes={{ root: 'login-button' }} 
                             variant="outlined"
@@ -89,7 +89,7 @@ class Login extends Component {
                             onClick={this.handleSubmit}>
                                 Sign in
                             </Button>
-                        </Link>
+                        {/* </Link> */}
                     </form>
                 </div>
             </div>
