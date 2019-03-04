@@ -15,10 +15,12 @@
 
 .vm-title {
     margin-top: 0;
+    margin-bottom: 0;
 }
 
 .vm-title > span {
     font-weight: lighter;
+    font-size: 20px;
 }
 
 .usage-group {
@@ -31,7 +33,7 @@
     margin: 0;
 }
 
-.refresh-button {
+.refresh-button, .details-button {
     background-color: transparent;
     border: none;
     color: rgb(208, 208, 208);
@@ -39,6 +41,12 @@
     font-size: 15px;
     cursor: pointer;
     outline: none;
+}
+
+.details-button {
+    display: inline-block;
+    padding: 0;
+
 }
 
 .vm-button-group {
@@ -58,4 +66,37 @@ button.vm-button.start-button {
 
 button.vm-button.delete-button {
     background-color: rgb(182, 11, 11);
+}
+
+#details-modal-body {
+    background-color: rgb(23, 39, 45);
+    width: 500px;
+    border-radius: 10px;
+    min-height: 200px;
+    outline: none;
+
+    margin: auto;
+    margin-top: 250px;
+}
+
+#details-modal-content {
+    color: rgb(208, 208, 208);
+    padding: 20px;
+}
+
+#details-modal-content > h2 {
+    margin: 0;
+}
+
+#vm-description {
+    padding: 10px;
+    background-color: #0F2027;
+    border-radius: 10px;
+    margin-top: 20px;
+}
+
+hr {
+    height: 1px;
+    border: none;
+    background-color: rgb(171, 171, 171);
 }
