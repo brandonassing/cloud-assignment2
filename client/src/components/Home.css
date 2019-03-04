@@ -15,6 +15,20 @@
     margin-right: 20px;
 }
 
+#username {
+    display: inline-block;
+    margin: 0;
+    margin-right: 20px;
+    color: white;
+    font-size: 15px;
+}
+
+#username > span {
+    font-weight: lighter;
+    color: rgb(208, 208, 208);
+
+}
+
 #logout-button-wrapper {
     margin-top: 10px;
     margin-bottom: 10px;
