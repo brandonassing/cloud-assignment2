@@ -16,11 +16,13 @@ class Home extends Component {
         this.state = {
             createOpen: false,
             anchorEl: null,
+            loggedInUser: "",
             vmName: "",
             vmTier: 0,
-            charges: 0.00,
+            charges: "0.00",
             vms: [{
                 _id: "1234",
+                ccId: "brandonassing",
                 name: "My VM 1",
                 creationDate: new Date('October 20, 2018 9:24:00'),
                 tier: 1,
@@ -36,6 +38,7 @@ class Home extends Component {
             {
                 _id: "1235",
                 name: "VM2",
+                ccId: "brandonassing",
                 creationDate: new Date('November 12, 2018 19:23:21'),
                 tier: 3,
                 running: false,
@@ -50,6 +53,7 @@ class Home extends Component {
             {
                 _id: "1236",
                 name: "Something vm 3",
+                ccId: "brandonassing",
                 creationDate: new Date('January 28, 2019 12:00:39'),
                 tier: 2,
                 running: true,
@@ -61,6 +65,7 @@ class Home extends Component {
             {
                 _id: "1237",
                 name: "My VM 4",
+                ccId: "brandonassing",
                 creationDate: new Date('March 1, 2019 13:24:00'),
                 tier: 1,
                 running: false,
@@ -69,6 +74,7 @@ class Home extends Component {
             {
                 _id: "1238",
                 name: "My VM 5",
+                ccId: "brandonassing",
                 creationDate: new Date('March 1, 2019 13:24:00'),
                 tier: 1,
                 running: false,
@@ -77,6 +83,7 @@ class Home extends Component {
             {
                 _id: "1239",
                 name: "My VM 6",
+                ccId: "brandonassing",
                 creationDate: new Date('March 1, 2019 13:24:00'),
                 tier: 2,
                 running: false,
@@ -85,6 +92,7 @@ class Home extends Component {
             {
                 _id: "1240",
                 name: "My VM 7",
+                ccId: "brandonassing",
                 creationDate: new Date('March 1, 2019 13:24:00'),
                 tier: 3,
                 running: false,
@@ -94,7 +102,10 @@ class Home extends Component {
     }
 
     componentDidMount() {
-        
+        //set user
+        this.setState({
+            loggedInUser: "brandonassing"
+        });
         this.refresh();
     }
 
@@ -114,7 +125,7 @@ class Home extends Component {
                 charges += vmCharge;
             });
             this.setState({
-                charges: Math.round(charges*100)/100
+                charges: (Math.round(charges*100)/100).toFixed(2)
             });
         }
     };
@@ -173,7 +184,7 @@ class Home extends Component {
         console.log('delete ' + id);
     };
 
-    upgrarde = (id) => {
+    upgrade = (id) => {
         console.log('upgrade ' + id);
     };
 
@@ -218,9 +229,10 @@ class Home extends Component {
             <div id="home-body">
                 <nav>
                     <div id="nav-wrapper">
-                        <h1 id="nav-heading">vee em.</h1>
+                        <h1 id="nav-heading">vee em<span>.</span></h1>
                         <div id="logout-button-wrapper">
                             <button id="refresh-button-main" className="refresh-button" onClick={this.refresh}>refresh</button>
+                            <h3 id="username"><span>user: </span>{this.state.loggedInUser}</h3>
                             <Link to="/login" style={{ textDecoration: 'none' }}>
                                 <Button classes={{ root: 'logout-button' }} variant="outlined" onClick={this.handleLogout}>
                                     Logout
