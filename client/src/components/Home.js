@@ -169,7 +169,7 @@ class Home extends Component {
         console.log('delete ' + id);
     };
 
-    upgrarde = (id) => {
+    upgrade = (id) => {
         console.log('upgrade ' + id);
     };
 

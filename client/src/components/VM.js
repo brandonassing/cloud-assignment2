@@ -8,8 +8,6 @@ class VM extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            // running: false,
-            // tier: 0
             detailsOpen: false,
             charges: 0.00
         }
@@ -113,7 +111,15 @@ class VM extends Component {
                 <h2 className="vm-title">{name} <span>- {tier === 1 ? "Basic" : (tier === 2 ? "Large" : "Ultra-large")}</span></h2>
                 <button className="details-button" onClick={() => this.setState({ detailsOpen: true })}>more details</button>
                 <p><strong>Creation time:</strong> {moment(creationDate).format("DD MMMM YYYY, h:mm:ss a")}</p>
-                <div className="usage-group"><p><strong>Usage:</strong> $ {this.state.charges}</p><button className="refresh-button" onClick={this.refresh}>refresh</button></div>
+                <div className="usage-group"><p><strong>Charge per VM:</strong> $ {this.state.charges}</p><button className="refresh-button" onClick={this.refresh}>refresh</button></div>
+                <div id="vm-upgrade-group" className="vm-button-group">
+                    <Button classes={{ root: 'vm-button upgrade-button' }} onClick={this.handleDowngrade} disabled={running}>
+                        Downgrade
+                    </Button>
+                    <Button classes={{ root: 'vm-button upgrade-button' }} onClick={this.handleUpgrade} disabled={running}>
+                        Upgrade
+                    </Button>
+                </div>
                 <div className="vm-button-group">
                     <Button classes={{ root: 'vm-button start-button' }} onClick={this.handleStartStop}>
                         {!running ? "Start" : "Stop"}
