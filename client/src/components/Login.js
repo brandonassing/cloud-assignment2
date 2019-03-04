@@ -15,24 +15,29 @@ class Login extends Component {
 
     validateForm() {
         return this.state.username.length > 0 && this.state.password.length > 0;
-    }
+    };
 
     handleUsernameChange = e => {
         e.preventDefault();
         this.setState({
             username: e.target.value
         });
-    }
+    };
     handlePasswordChange = e => {
         e.preventDefault();
         this.setState({
             password: e.target.value
         });
-    }
+    };
 
     handleSubmit = () => {
-        this.props.loggedIn(true)
-    }
+        // fetch('/users')
+        // .then(res => res.json())
+        // .then(resJson => {
+
+        // });
+        this.props.loggedIn(true);
+    };
     
     render() {
         return (
@@ -75,6 +80,7 @@ class Login extends Component {
                             //     className: "input-label"
                             // }}
                         />
+                        {/* TODO can still click on text in button */}
                         <Link to="/" style={{ textDecoration: 'none' }}>
                             <Button 
                             classes={{ root: 'login-button' }} 
