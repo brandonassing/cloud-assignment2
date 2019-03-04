@@ -114,14 +114,15 @@ button.logout-button {
 }
 
 button.tier-button {
-    width: 150px;
+    /* width: 150px; */
     color: rgb(208, 208, 208);
     background-color: rgba(0, 0, 0, 0.09);
+    padding: 15px;
 } 
 
-#tier-menu > div > ul {
+/* #tier-menu > div > ul {
     width: 120px;
-}
+} */
 
 #modal-footer {
     margin-bottom: 15px;

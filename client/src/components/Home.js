@@ -163,7 +163,7 @@ class Home extends Component {
                                     onClick={this.handleMenuClick}
                                     classes={{ root: 'tier-button' }}
                                 >
-                                    Tier {this.state.vmTier}
+                                    Server tier: {this.state.vmTier === 1 ? "Basic" : (this.state.vmTier == 2 ? "Large" : "Ultra-large")}
                                 </Button>
                                 <Menu
                                     id="tier-menu"
@@ -171,9 +171,9 @@ class Home extends Component {
                                     open={Boolean(this.state.anchorEl)}
                                     onClose={this.handleMenuClose}
                                 >
-                                    <MenuItem onClick={this.handleMenuClose} value={1}>Tier 1</MenuItem>
-                                    <MenuItem onClick={this.handleMenuClose} value={2}>Tier 2</MenuItem>
-                                    <MenuItem onClick={this.handleMenuClose} value={3}>Tier 3</MenuItem>
+                                    <MenuItem onClick={this.handleMenuClose} value={1}>Basic virtual server instance</MenuItem>
+                                    <MenuItem onClick={this.handleMenuClose} value={2}>Large virtual server instance</MenuItem>
+                                    <MenuItem onClick={this.handleMenuClose} value={3}>Ultra-large virtual server instance</MenuItem>
                                 </Menu>
                             </div>
                             <div id="modal-footer">
