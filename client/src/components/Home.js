@@ -160,8 +160,8 @@ class Home extends Component {
     };
 
     handleLogout = () => {
-        this.props.loggedIn(false)
-    }
+        this.props.loggedIn(false);
+    };
 
     createVM = () => {
         this.setState({
