@@ -5,12 +5,17 @@ var cookieParser = require("cookie-parser");
 var logger = require("morgan");
 
 var indexRouter = require('./routes/index');
-var indexRouter = require("./routes/index");
+var vmsRouter = require('./routes/vms')
+
+
+var vms = require("./routes/index");
 var usersRouter = require("./routes/users");
 
-const mongoose = require("mongoose");
-
 var app = express();
+
+// Database stuff
+
+const mongoose = require("mongoose");
 
 mongoose.Promise = global.Promise;
 mongoose.connect(
@@ -20,6 +25,8 @@ mongoose.connect(
 );
 var db = mongoose.connection;
 db.on("error", console.error.bind(console, "MongoDB connection error:"));
+
+
 
 // view engine setup
 app.set("views", path.join(__dirname, "views"));
@@ -32,7 +39,7 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, "public")));
 
 app.use('/', indexRouter);
-app.use("/", indexRouter);
+app.use("/vms", vmsRouter);
 app.use("/users", usersRouter);
 
 // catch 404 and forward to error handler
