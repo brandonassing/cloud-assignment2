@@ -93,6 +93,37 @@ class Home extends Component {
     }
 
     render() {
+        let tierDescription;
+        if (this.state.vmTier === 1) {
+            tierDescription = (
+                <div>
+                    <p>8 virtual processor cores</p>
+                    <p>16 GB of virtual RAM</p>
+                    <p>20 GB of storage space in the root file system</p>
+                    <p>$0.05/minute</p>
+                </div>
+            )
+        }
+        else if (this.state.vmTier === 2) {
+            tierDescription = (
+                <div>
+                    <p>32 virtual processor cores</p>
+                    <p>64 GB of virtual RAM</p>
+                    <p>20 GB of storage space in the root file system</p>
+                    <p>$0.10/minute</p>
+                </div>
+            )
+        }
+        else if (this.state.vmTier === 3) {
+            tierDescription = (
+                <div>
+                    <p>128 virtual processor cores</p>
+                    <p>512 GB of virtual RAM</p>
+                    <p>40 GB of storage space in the root file system</p>
+                    <p>$0.15/minute</p>
+                </div>
+            )
+        }
         return (
             <div id="home-body">
                 <nav>
@@ -175,6 +206,14 @@ class Home extends Component {
                                     <MenuItem onClick={this.handleMenuClose} value={2}>Large virtual server instance</MenuItem>
                                     <MenuItem onClick={this.handleMenuClose} value={3}>Ultra-large virtual server instance</MenuItem>
                                 </Menu>
+                                {
+                                    this.state.vmTier !== 0 ? (
+                                        <div id="tier-description">
+                                            {tierDescription}
+                                        </div>)
+                                        :
+                                        ""
+                                }
                             </div>
                             <div id="modal-footer">
                                 <Button classes={{ root: 'create-vm-button' }} onClick={this.createVM} disabled={this.state.vmName === "" || this.state.vmTier === 0}>

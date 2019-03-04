@@ -124,6 +124,13 @@ button.tier-button {
     width: 120px;
 } */
 
+#tier-description {
+    padding: 10px;
+    background-color: #0F2027;
+    border-radius: 10px;
+    margin-top: 20px;
+}
+
 #modal-footer {
     margin-bottom: 15px;
 }
