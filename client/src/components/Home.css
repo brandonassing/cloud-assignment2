@@ -106,5 +106,33 @@ button.logout-button {
 
 #modal-content > div > div:after {
     border-bottom: 2px solid rgb(208, 208, 208);
-    ;
+}
+
+#tier-dropdown {
+    margin-top: 15px;
+    margin-bottom: 25px;
+}
+
+button.tier-button {
+    width: 150px;
+    color: rgb(208, 208, 208);
+    background-color: rgba(0, 0, 0, 0.09);
+} 
+
+#tier-menu > div > ul {
+    width: 120px;
+}
+
+#modal-footer {
+    margin-bottom: 15px;
+}
+
+button.create-vm-button {
+    width: 100%;
+    color: rgb(208, 208, 208);
+    background-color: rgb(15, 196, 178);
+    border: none;
+}
+button.create-vm-button:hover {
+    background-color: rgb(15, 196, 178);
 }

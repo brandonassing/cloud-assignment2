@@ -5,6 +5,8 @@ import { Link } from 'react-router-dom';
 import VM from './VM';
 import Modal from '@material-ui/core/Modal';
 import TextField from '@material-ui/core/TextField';
+import Menu from '@material-ui/core/Menu';
+import MenuItem from '@material-ui/core/MenuItem';
 
 
 class Home extends Component {
@@ -12,7 +14,9 @@ class Home extends Component {
         super(props);
         this.state = {
             createOpen: false,
+            anchorEl: null,
             vmName: "",
+            vmTier: 1,
             vms: [{
                 name: "My VM 1",
                 startTime: new Date('October 20, 2018 9:24:00'),
@@ -50,7 +54,7 @@ class Home extends Component {
             }]
         }
     }
-    
+
     handleNameChange = (e) => {
         this.setState({
             vmName: e.target.value
@@ -62,11 +66,31 @@ class Home extends Component {
     };
 
     handleClose = () => {
-        this.setState({ 
+        this.setState({
             createOpen: false,
-            vmName: ""
+            vmName: "",
+            vmTier: 1
         });
     };
+
+    handleMenuClick = event => {
+        this.setState({ anchorEl: event.currentTarget });
+    };
+
+    handleMenuClose = (e) => {
+        this.setState({
+            anchorEl: null,
+            vmTier: !!e.target.value ? e.target.value : this.state.vmTier
+        });
+    };
+
+    createVM = () => {
+        this.setState({
+            createOpen: false,
+            vmName: "",
+            vmTier: 1
+        });
+    }
 
     render() {
         return (
@@ -123,18 +147,40 @@ class Home extends Component {
                         <div id="modal-content">
                             <h2>Configure VM</h2>
                             <TextField
-                            id="vm-name"
-                            label="Name"
-                            value={this.state.vmName}
-                            onChange={this.handleNameChange}
-                            margin="normal"
-                            variant="filled"
-                            type="text"
-                            fullWidth={true}
-                        />
-                        </div>
-                        <div id="modal-footer">
-
+                                id="vm-name"
+                                label="Name"
+                                value={this.state.vmName}
+                                onChange={this.handleNameChange}
+                                margin="normal"
+                                variant="filled"
+                                type="text"
+                                fullWidth={true}
+                            />
+                            <div id="tier-dropdown">
+                                <Button
+                                    aria-owns={this.state.anchorEl ? 'tier-menu' : undefined}
+                                    aria-haspopup="true"
+                                    onClick={this.handleMenuClick}
+                                    classes={{ root: 'tier-button' }}
+                                >
+                                    Tier {this.state.vmTier}
+                                </Button>
+                                <Menu
+                                    id="tier-menu"
+                                    anchorEl={this.state.anchorEl}
+                                    open={Boolean(this.state.anchorEl)}
+                                    onClose={this.handleMenuClose}
+                                >
+                                    <MenuItem onClick={this.handleMenuClose} value={1}>Tier 1</MenuItem>
+                                    <MenuItem onClick={this.handleMenuClose} value={2}>Tier 2</MenuItem>
+                                    <MenuItem onClick={this.handleMenuClose} value={3}>Tier 3</MenuItem>
+                                </Menu>
+                            </div>
+                            <div id="modal-footer">
+                                <Button classes={{ root: 'create-vm-button' }} onClick={this.createVM}>
+                                    Create
+                                </Button>
+                            </div>
                         </div>
                     </div>
                 </Modal>
