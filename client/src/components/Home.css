@@ -137,3 +137,7 @@ button.create-vm-button {
 button.create-vm-button:hover {
     background-color: rgb(15, 196, 178);
 }
+
+button.create-vm-button:disabled {
+    background-color: rgb(103, 169, 162);
+}

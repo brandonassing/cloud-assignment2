@@ -16,7 +16,7 @@ class Home extends Component {
             createOpen: false,
             anchorEl: null,
             vmName: "",
-            vmTier: 1,
+            vmTier: 0,
             vms: [{
                 name: "My VM 1",
                 startTime: new Date('October 20, 2018 9:24:00'),
@@ -69,7 +69,7 @@ class Home extends Component {
         this.setState({
             createOpen: false,
             vmName: "",
-            vmTier: 1
+            vmTier: 0
         });
     };
 
@@ -88,7 +88,7 @@ class Home extends Component {
         this.setState({
             createOpen: false,
             vmName: "",
-            vmTier: 1
+            vmTier: 0
         });
     }
 
@@ -163,7 +163,7 @@ class Home extends Component {
                                     onClick={this.handleMenuClick}
                                     classes={{ root: 'tier-button' }}
                                 >
-                                    Server tier: {this.state.vmTier === 1 ? "Basic" : (this.state.vmTier == 2 ? "Large" : "Ultra-large")}
+                                    {this.state.vmTier === 0 ? "Select tier" : (this.state.vmTier === 1 ? "Server tier: Basic" : (this.state.vmTier === 2 ? "Server tier: Large" : "Server tier: Ultra-large"))}
                                 </Button>
                                 <Menu
                                     id="tier-menu"
@@ -177,7 +177,7 @@ class Home extends Component {
                                 </Menu>
                             </div>
                             <div id="modal-footer">
-                                <Button classes={{ root: 'create-vm-button' }} onClick={this.createVM}>
+                                <Button classes={{ root: 'create-vm-button' }} onClick={this.createVM} disabled={this.state.vmName === "" || this.state.vmTier === 0}>
                                     Create
                                 </Button>
                             </div>
