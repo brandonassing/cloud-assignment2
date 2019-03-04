@@ -21,43 +21,50 @@ class Home extends Component {
                 _id: "1234",
                 name: "My VM 1",
                 startTime: new Date('October 20, 2018 9:24:00'),
-                tier: 1
+                tier: 1,
+                running: true
             },
             {
                 _id: "1235",
                 name: "VM2",
                 startTime: new Date('November 12, 2018 19:23:21'),
-                tier: 3
+                tier: 3,
+                running: false
             },
             {
                 _id: "1236",
                 name: "Something vm 3",
                 startTime: new Date('January 28, 2019 12:00:39'),
-                tier: 2
+                tier: 2,
+                running: true
             },
             {
                 _id: "1237",
                 name: "My VM 4",
                 startTime: new Date('March 1, 2019 13:24:00'),
-                tier: 1
+                tier: 1,
+                running: false
             },
             {
                 _id: "1238",
                 name: "My VM 5",
                 startTime: new Date('March 1, 2019 13:24:00'),
-                tier: 1
+                tier: 1,
+                running: true
             },
             {
                 _id: "1239",
                 name: "My VM 6",
                 startTime: new Date('March 1, 2019 13:24:00'),
-                tier: 2
+                tier: 2,
+                running: true
             },
             {
                 _id: "1240",
                 name: "My VM 7",
                 startTime: new Date('March 1, 2019 13:24:00'),
-                tier: 3
+                tier: 3,
+                running: false
             }]
         }
     }
@@ -97,11 +104,28 @@ class Home extends Component {
             vmName: "",
             vmTier: 0
         });
-    }
+    };
+
+    startStop = (id, running) => {
+        if (running) {
+            console.log("Stopping " + id);
+        }
+        else {
+            console.log("Starting " + id);
+        }
+    };
 
     delete = (id) => {
         console.log('delete ' + id);
-    }
+    };
+
+    upgrarde = (id) => {
+        console.log('upgrade ' + id);
+    };
+
+    downgrade = (id) => {
+        console.log('downgrade ' + id);
+    };
 
     render() {
         let tierDescription;
@@ -173,7 +197,7 @@ class Home extends Component {
                     {
                         this.state.vms.map((item) => {
                             return (
-                                <VM key={item._id} _id={item._id} name={item.name} startTime={item.startTime} tier={item.tier} delete={this.delete} />
+                                <VM key={item._id} _id={item._id} name={item.name} startTime={item.startTime} tier={item.tier} running={item.running} startStop={this.startStop} delete={this.delete} upgrade={this.upgrade} downgrade={this.downgrade} />
                             )
                         })
                     }
