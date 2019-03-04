@@ -6,35 +6,54 @@ import Login from './components/Login';
 import Home from './components/Home';
 
 class App extends Component {
-  constructor(props){
+  constructor(props) {
     super(props)
 
-    this.state={
+    this.state = {
       isAuthenticated: false
     }
   }
 
-  loggedIn = (auth) => {
-    this.setState({isAuthenticated: auth})
+  componentDidMount() {
+    // fetch("/users")
+    //   .then(res => res.json())
+    //   .then(resJson => {
+    //     let loggedIn = false;
+    //     if (resJson.users.length != 0) {
+    //       resJson.users.forEach((user) => {
+    //         if (user.loggedIn) {
+    //           loggedIn = true;
+    //         }
+    //       });
+    //     }
+    //     this.setState({
+    //       isAuthenticated: loggedIn
+    //     });
+    //   });
   }
-  
+
+  loggedIn = (auth) => {
+    this.setState({ isAuthenticated: auth })
+  }
+
   render() {
-
-    console.log(this.state)
-
-    const isAuthenticated=this.state.isAuthenticated 
+    const isAuthenticated = this.state.isAuthenticated
 
     return (
       <Router>
         <div>
           <Route exact path="/login" render={(props) => (
             !isAuthenticated ? (
-          <Login {...props} loggedIn={this.loggedIn}/>):
-          <Redirect to="/"/>)}/>
+              <Login {...props} loggedIn={this.loggedIn} />) 
+              :
+              <Redirect to="/" />)} />
+
           <Route exact path="/" render={(props) => (
-            isAuthenticated ? (
-          <Home {...props} loggedIn={this.loggedIn}/>):
-            <Redirect to="/login"/>)}/>
+            isAuthenticated ?
+              <Home {...props} loggedIn={this.loggedIn} />
+              :
+              <Redirect to="/login" />
+          )} />
         </div>
       </Router>
     );
