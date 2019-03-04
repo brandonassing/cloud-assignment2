@@ -18,7 +18,7 @@ class Home extends Component {
             anchorEl: null,
             vmName: "",
             vmTier: 0,
-            charges: 0.00,
+            charges: "0.00",
             vms: [{
                 _id: "1234",
                 name: "My VM 1",
@@ -114,7 +114,7 @@ class Home extends Component {
                 charges += vmCharge;
             });
             this.setState({
-                charges: Math.round(charges*100)/100
+                charges: (Math.round(charges*100)/100).toFixed(2)
             });
         }
     };
@@ -214,7 +214,7 @@ class Home extends Component {
             <div id="home-body">
                 <nav>
                     <div id="nav-wrapper">
-                        <h1 id="nav-heading">vee em.</h1>
+                        <h1 id="nav-heading">vee em<span>.</span></h1>
                         <div id="logout-button-wrapper">
                             <button id="refresh-button-main" className="refresh-button" onClick={this.refresh}>refresh</button>
                             <Link to="/login" style={{ textDecoration: 'none' }}>

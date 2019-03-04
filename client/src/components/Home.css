@@ -33,6 +33,10 @@ button.logout-button {
     color: white;
 }
 
+#nav-heading > span {
+    color: red;
+}
+
 #home-main {
     padding-left: 200px;
     padding-right: 200px;

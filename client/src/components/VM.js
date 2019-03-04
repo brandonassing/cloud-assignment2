@@ -9,7 +9,7 @@ class VM extends Component {
         super(props);
         this.state = {
             detailsOpen: false,
-            charges: 0.00
+            charges: "0.00"
         }
     }
 
@@ -55,7 +55,7 @@ class VM extends Component {
         }
         charges += vmCharge;
         this.setState({
-            charges: Math.round(charges * 100) / 100
+            charges: (Math.round(charges * 100) / 100).toFixed(2)
         });
 
     };
@@ -109,8 +109,8 @@ class VM extends Component {
             <div className="vm-body">
                 <h2 className="vm-title">{name} <span>- {tier === 1 ? "Basic" : (tier === 2 ? "Large" : "Ultra-large")}</span></h2>
                 <button className="details-button" onClick={() => this.setState({ detailsOpen: true })}>more details</button>
-                <p><strong>Creation time:</strong> {moment(creationDate).format("DD MMMM YYYY, h:mm:ss a")}</p>
-                <div className="usage-group"><p><strong>Charge per VM:</strong> $ {this.state.charges}</p><button className="refresh-button" onClick={this.refresh}>refresh</button></div>
+                <p><strong>Creation:</strong> {moment(creationDate).format("DD MMM YYYY, h:mm:ss a")}</p>
+                <div className="usage-group"><p><strong>Usage charge:</strong> $ {this.state.charges}</p><button className="refresh-button" onClick={this.refresh}>refresh</button></div>
                 <div id="vm-upgrade-group" className="vm-button-group">
                     <Button classes={{ root: 'vm-button upgrade-button' }} onClick={this.handleDowngrade} disabled={running || tier === 1}>
                         Downgrade
