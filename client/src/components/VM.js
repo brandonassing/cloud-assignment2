@@ -18,10 +18,10 @@ class VM extends Component {
                 <p><strong>Start time:</strong> {moment(startTime).format("DD MMMM YYYY, h:mm:ss a")}</p>
                 <div className="usage-group"><p><strong>Usage:</strong> 50%</p><button className="refresh-button">refresh</button></div>
                 <div className="vm-button-group">
-                    <Button classes={{ root: 'vm-button start-button' }} variant="outlined">
+                    <Button classes={{ root: 'vm-button start-button' }}>
                         {!this.state.started ? "Start" : "Stop"}
                     </Button>
-                    <Button classes={{ root: 'vm-button delete-button' }} variant="outlined">
+                    <Button classes={{ root: 'vm-button delete-button' }}>
                         Delete
                     </Button>
                 </div>

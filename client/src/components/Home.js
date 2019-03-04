@@ -3,12 +3,16 @@ import './Home.css';
 import Button from '@material-ui/core/Button';
 import { Link } from 'react-router-dom';
 import VM from './VM';
+import Modal from '@material-ui/core/Modal';
+import TextField from '@material-ui/core/TextField';
 
 
 class Home extends Component {
     constructor(props) {
         super(props);
         this.state = {
+            createOpen: false,
+            vmName: "",
             vms: [{
                 name: "My VM 1",
                 startTime: new Date('October 20, 2018 9:24:00'),
@@ -17,35 +21,53 @@ class Home extends Component {
             {
                 name: "VM2",
                 startTime: new Date('November 12, 2018 19:23:21'),
-                
+
             },
             {
                 name: "Something vm 3",
                 startTime: new Date('January 28, 2019 12:00:39'),
-                
+
             },
             {
                 name: "My VM 4",
                 startTime: new Date('March 1, 2019 13:24:00'),
-                
+
             },
             {
                 name: "My VM 5",
                 startTime: new Date('March 1, 2019 13:24:00'),
-                
+
             },
             {
                 name: "My VM 6",
                 startTime: new Date('March 1, 2019 13:24:00'),
-                
+
             },
             {
                 name: "My VM 7",
                 startTime: new Date('March 1, 2019 13:24:00'),
-                
+
             }]
         }
     }
+    
+    handleNameChange = (e) => {
+        this.setState({
+            vmName: e.target.value
+        });
+    };
+
+    handleOpen = () => {
+        this.setState({ createOpen: true });
+    };
+
+    handleClose = () => {
+        this.setState({ 
+            createOpen: false,
+            vmName: ""
+        });
+    };
+
     render() {
         return (
             <div id="home-body">
@@ -62,7 +84,19 @@ class Home extends Component {
                     </div>
                 </nav>
                 <div id="home-main">
-                    <div id="vm-create" className="vm-body">
+                    {/* <div id="create-button-container" className="vm-body">
+                        <Button classes={{ root: 'create-button' }}>
+                            <div id="vm-create">
+                                <h2 id="plus-symbol">
+                                    +
+                                </h2>
+                                <h2 id="create-text">
+                                    Create
+                                </h2>
+                            </div>
+                        </Button>
+                    </div> */}
+                    <div id="vm-create" className="vm-body" onClick={this.handleOpen}>
                         <h2 id="plus-symbol">
                             +
                         </h2>
@@ -72,13 +106,39 @@ class Home extends Component {
                     </div>
                     {
                         this.state.vms.map((item) => {
-                            return(
+                            return (
                                 <VM key={item.name} name={item.name} startTime={item.startTime} />
                             )
                         })
                     }
 
                 </div>
+                <Modal
+                    aria-labelledby="simple-modal-title"
+                    aria-describedby="simple-modal-description"
+                    open={this.state.createOpen}
+                    onClose={this.handleClose}
+                >
+                    <div id="modal-body">
+                        <div id="modal-content">
+                            <h2>Configure VM</h2>
+                            <TextField
+                            id="vm-name"
+                            label="Name"
+                            value={this.state.vmName}
+                            onChange={this.handleNameChange}
+                            margin="normal"
+                            variant="filled"
+                            type="text"
+                            fullWidth={true}
+                        />
+                        </div>
+                        <div id="modal-footer">
+
+                        </div>
+                    </div>
+                </Modal>
+
             </div>
         );
     }
