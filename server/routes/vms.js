@@ -27,7 +27,6 @@ router.get("/all", function(req, res) {
         res.send("error yo")
     }else{
 
-      // Send the list of vms back to the react app
       res.send(body)     
     }
 
@@ -53,7 +52,6 @@ router.get("/usage", function(req, res) {
          res.send("error yo")
      }else{
  
-       // Send the list of vms back to the react app
        res.send(body)     
      }
  
@@ -79,7 +77,6 @@ router.get("/charges", function(req, res) {
          res.send("error yo")
      }else{
  
-       // Send the list of vms back to the react app
        res.send(body)     
      }
  
@@ -101,7 +98,6 @@ router.post("/create", function(req, res) {
      json: true 
    };
 
-   console.log("going here: " + config["cloud-usage-monitor"] + "/vms/create")
  
    // Send HTTP object
    request(options, function (error, response, body) {
@@ -110,7 +106,6 @@ router.post("/create", function(req, res) {
          res.send("error yo")
      }else{
  
-       // Send the list of vms back to the react app
        res.send(body)     
      }
  
@@ -139,7 +134,6 @@ router.put("/start", function(req, res) {
          res.send("error yo")
      }else{
  
-       // Send the list of vms back to the react app
        res.send(body)     
      }
  
@@ -168,7 +162,6 @@ router.put("/stop", function(req, res) {
          res.send("error yo")
      }else{
  
-       // Send the list of vms back to the react app
        res.send(body)     
      }
  
@@ -198,7 +191,6 @@ router.put("/upgrade", function(req, res) {
          res.send("error yo")
      }else{
  
-       // Send the list of vms back to the react app
        res.send(body)     
      }
  
@@ -227,12 +219,12 @@ router.put("/downgrade", function(req, res) {
          res.send("error yo")
      }else{
  
-       // Send the list of vms back to the react app
        res.send(body)     
      }
  
    })
 });
+
 
 
 // DELETE:
@@ -257,7 +249,6 @@ router.delete("/delete", function(req, res) {
          res.send("error yo")
      }else{
  
-       // Send the list of vms back to the react app
        res.send(body)     
      }
  

@@ -21,4 +21,60 @@ router.get("/", function(req, res) {
   });
 });
 
+// PUt: Login
+router.put("/login", function(req, res) {
+  // Build HTTP object
+  var options = {}  
+
+  var body = {}
+  body.model = "a model"
+
+  var options = { 
+    body: body,
+    method: 'PUT',
+    url: config["mongo-url"] + "optional",
+    json: true 
+  };
+
+  // Send HTTP object
+  request(options, function (error, response, body) {
+    if (error) {
+        res.status(500)
+        res.send("error yo")
+    }else{
+
+      res.send(body)     
+    }
+
+  })
+});
+
+// PUT: Logout
+router.put("/logout", function(req, res) {
+  // Build HTTP object
+  var options = {}  
+
+  var body = {}
+  body.model = "a model"
+
+  var options = { 
+    body: body,
+    method: 'PUT',
+    url: config["mongo-url"] + "optional",
+    json: true 
+  };
+
+  // Send HTTP object
+  request(options, function (error, response, body) {
+    if (error) {
+        res.status(500)
+        res.send("error yo")
+    }else{
+
+      res.send(body)     
+    }
+
+  })
+});
+
 module.exports = router;
