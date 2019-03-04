@@ -27,7 +27,10 @@ class App extends Component {
     return (
       <Router>
         <div>
-          <Route exact path="/login" render={(props) => <Login {...props} loggedIn={this.loggedIn}/>} />
+          <Route exact path="/login" render={(props) => (
+            !isAuthenticated ? (
+          <Login {...props} loggedIn={this.loggedIn}/>):
+          <Redirect to="/"/>)}/>
           <Route exact path="/" render={(props) => (
             isAuthenticated ? (
           <Home {...props} loggedIn={this.loggedIn}/>):
