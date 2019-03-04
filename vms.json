@@ -1,0 +1,78 @@
+[{
+    "_id": "1234",
+    "ccId": "brandonassing",
+    "name": "My VM 1",
+    "creationDate": "October 20, 2018 9:24:00",
+    "tier": 1,
+    "running": true,
+    "usage": [{
+        "startTime": "October 20, 2018 10:24:00",
+        "endTime": "October 20, 2018 14:28:00"
+    }, {
+        "startTime": "March 4, 2019 12:24:00",
+        "endTime": null
+    }]
+},
+{
+    "_id": "1235",
+    "name": "VM2",
+    "ccId": "brandonassing",
+    "creationDate": "November 12, 2018 19:23:21",
+    "tier": 3,
+    "running": false,
+    "usage": [{
+        "startTime": "October 20, 2018 10:24:00",
+        "endTime": "October 20, 2018 14:28:00"
+    }, {
+        "startTime": "October 23, 2018 12:24:00",
+        "endTime": "October 25, 2018 14:28:00"
+    }]
+},
+{
+    "_id": "1236",
+    "name": "Something vm 3",
+    "ccId": "brandonassing",
+    "creationDate": "January 28, 2019 12:00:39",
+    "tier": 2,
+    "running": true,
+    "usage": [{
+        "startTime": "March 2, 2019 11:39:23",
+        "endTime": null
+    }]
+},
+{
+    "_id": "1237",
+    "name": "My VM 4",
+    "ccId": "brandonassing",
+    "creationDate": "March 1, 2019 13:24:00",
+    "tier": 1,
+    "running": false,
+    "usage": []
+},
+{
+    "_id": "1238",
+    "name": "My VM 5",
+    "ccId": "brandonassing",
+    "creationDate": "March 1, 2019 13:24:00",
+    "tier": 1,
+    "running": false,
+    "usage": []
+},
+{
+    "_id": "1239",
+    "name": "My VM 6",
+    "ccId": "brandonassing",
+    "creationDate": "March 1, 2019 13:24:00",
+    "tier": 2,
+    "running": false,
+    "usage": []
+},
+{
+    "_id": "1240",
+    "name": "My VM 7",
+    "ccId": "brandonassing",
+    "creationDate": "March 1, 2019 13:24:00",
+    "tier": 3,
+    "running": false,
+    "usage": []
+}]
