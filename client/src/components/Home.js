@@ -94,9 +94,23 @@ class Home extends Component {
             vmTier: !!e.target.value ? e.target.value : this.state.vmTier
         });
     };
-    //TODO send log out request
+    
     handleLogout = () => {
-        this.props.loggedIn(false);
+        fetch('/users/logout', {
+            method: 'PUT',
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                ccId: this.state.loggedInUser
+            })
+        })
+        .then(res => res.json())
+        .then(resJson => {
+            // TODO possibly need state cleanup here
+            this.props.loggedIn(false);
+        });
     };
 
     createVM = () => {

@@ -36,6 +36,7 @@ class App extends Component {
     this.setState({ isAuthenticated: auth })
   }
 
+  // TODO bug: if logged in and refresh on / it redirects to /login and then back to /
   render() {
     const isAuthenticated = this.state.isAuthenticated
 
