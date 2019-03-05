@@ -120,17 +120,17 @@ class Home extends Component {
         // TODO error catch
     };
 
-    startStop = (id, running) => {
+    startStop = (_id, running) => {
         if (running) {
-            console.log("Stopping " + id);
+            console.log("Stopping " + _id);
         }
         else {
-            console.log("Starting " + id);
+            console.log("Starting " + _id);
         }
     };
 
-    delete = (id) => {
-        fetch('/vms/' + id, {
+    delete = (_id) => {
+        fetch('/vms/' + _id, {
             method: 'DELETE',
             Headers: {
                 'Accept': 'application/json',
@@ -139,18 +139,24 @@ class Home extends Component {
         })
         .then(res => res.json())
         .then(resJson => {
+            let indexRemoved;
+            for (let i = 0; i < this.state.vms.length; i++) {
+                if (this.state.vms[i]._id === resJson._id) {
+                    indexRemoved = i;
+                }
+            }
             this.setState({
-                vms: []
+                vms: [...this.state.vms.slice(0, indexRemoved), ...this.state.vms.slice(indexRemoved + 1)]
             });
         });
     };
 
-    upgrade = (id) => {
-        console.log('upgrade ' + id);
+    upgrade = (_id) => {
+        console.log('upgrade ' + _id);
     };
 
-    downgrade = (id) => {
-        console.log('downgrade ' + id);
+    downgrade = (_id) => {
+        console.log('downgrade ' + _id);
     };
 
     render() {
