@@ -68,26 +68,27 @@ router.put("/stop", function(req, res) {
 });
 
 // PUT: Upgrade a VM
-router.put("/upgrade", function(req, res) {
-  // -------------------- Talk to Mongo here --------------------
-
-  var response = {};
-  response.test = "upgrade a vm";
-  res.send(response);
+router.put("/upgrade/:_id", function(req, res) {
+  Vm.updateOne({ _id: req.params._id }, { $inc: { tier: 1 } }, function(err) {
+    if (err) {
+      res.send(err);
+    }
+    res.send({ _id: req.params._id });
+  });
 });
 
 // PUT: Downgrade a VM
-router.put("/downgrade", function(req, res) {
-  // -------------------- Talk to Mongo here --------------------
-
-  var response = {};
-  response.test = "downgrade a vm";
-  res.send(response);
+router.put("/downgrade/:_id", function(req, res) {
+  Vm.updateOne({ _id: req.params._id }, { $inc: { tier: -1 } }, function(err) {
+    if (err) {
+      res.send(err);
+    }
+    res.send({ _id: req.params._id });
+  });
 });
 
 // DELETE:
 router.delete("/:_id", function(req, res) {
-  console.log(req.params._id);
   Vm.deleteOne({ _id: req.params._id }, function(err) {
     if (err) {
       res.send(err);
