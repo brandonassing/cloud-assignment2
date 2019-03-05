@@ -71,11 +71,15 @@ router.put("/start/:_id", function(req, res) {
 
 // PUT: Stop a VM
 router.put("/stop/:_id", function(req, res) {
-  // -------------------- Talk to Mongo here --------------------
-
-  var response = {};
-  response.test = "stop a vm";
-  res.send(response);
+  Vm.findOne({ _id: req.params._id }, function(err, vm) {
+    if (err) {
+      res.send(err);
+    }
+    vm.running = false;
+    vm.usage[vm.usage.length - 1].endTime = new Date();
+    vm.save();
+    res.send(vm);
+  });
 });
 
 // PUT: Upgrade a VM
