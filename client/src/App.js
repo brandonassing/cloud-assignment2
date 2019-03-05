@@ -10,7 +10,8 @@ class App extends Component {
     super(props)
 
     this.state = {
-      isAuthenticated: false
+      isAuthenticated: false,
+      username: ""
     }
   }
 
@@ -27,13 +28,17 @@ class App extends Component {
           });
         }
         this.setState({
-          isAuthenticated: loggedIn
+          isAuthenticated: loggedIn,
+          username: ""
         });
       });
   }
 
-  loggedIn = (auth) => {
-    this.setState({ isAuthenticated: auth })
+  loggedIn = (auth, username) => {
+    this.setState({ 
+      isAuthenticated: auth,
+      username: username 
+    })
   }
 
   // TODO bug: if logged in and refresh on / it redirects to /login and then back to /
@@ -51,7 +56,7 @@ class App extends Component {
 
           <Route exact path="/" render={(props) => (
             isAuthenticated ?
-              <Home {...props} loggedIn={this.loggedIn} />
+              <Home {...props} loggedIn={this.loggedIn} username={this.state.username} />
               :
               <Redirect to="/login" />
           )} />

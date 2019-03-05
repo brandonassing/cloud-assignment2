@@ -31,12 +31,26 @@ class Login extends Component {
     };
 
     handleSubmit = () => {
-        // fetch('/users')
-        // .then(res => res.json())
-        // .then(resJson => {
-
-        // });
-        this.props.loggedIn(true);
+        fetch('/users/login', {
+            method: 'PUT',
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                username: this.state.username,
+                password: this.state.password
+            })
+        })
+        .then(res => res.json())
+        .then(resJson => {
+            if (resJson.error) {
+                console.log("wrong username/password")
+            }
+            else {
+                this.props.loggedIn(true, this.state.username);
+            }
+        });
     };
     
     render() {

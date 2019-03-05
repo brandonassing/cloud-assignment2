@@ -29,9 +29,8 @@ class Home extends Component {
     }
 
     componentDidMount() {
-        // TODO get this from props 
         this.setState({
-            loggedInUser: "brandonassing"
+            loggedInUser: this.props.username
         }, () => {
             this.refresh();
         });
@@ -103,13 +102,14 @@ class Home extends Component {
                 'Content-Type': 'application/json'
             },
             body: JSON.stringify({
-                ccId: this.state.loggedInUser
+                username: this.state.loggedInUser
             })
         })
         .then(res => res.json())
         .then(resJson => {
-            // TODO possibly need state cleanup here
-            this.props.loggedIn(false);
+            if (!resJson.error) {
+                this.props.loggedIn(false);
+            }
         });
     };
 
