@@ -9,6 +9,8 @@ import TextField from '@material-ui/core/TextField';
 import Menu from '@material-ui/core/Menu';
 import MenuItem from '@material-ui/core/MenuItem';
 import moment from 'moment';
+
+// LEGACY REACT FUNC. USED BY UP/DOWNGRADE
 import update from 'react-addons-update';
 
 class Home extends Component {
@@ -138,18 +140,18 @@ class Home extends Component {
                 'Content-Type': 'application/json'
             }
         })
-        .then(res => res.json())
-        .then(resJson => {
-            let indexRemoved;
-            for (let i = 0; i < this.state.vms.length; i++) {
-                if (this.state.vms[i]._id === resJson._id) {
-                    indexRemoved = i;
+            .then(res => res.json())
+            .then(resJson => {
+                let indexRemoved;
+                for (let i = 0; i < this.state.vms.length; i++) {
+                    if (this.state.vms[i]._id === resJson._id) {
+                        indexRemoved = i;
+                    }
                 }
-            }
-            this.setState({
-                vms: [...this.state.vms.slice(0, indexRemoved), ...this.state.vms.slice(indexRemoved + 1)]
+                this.setState({
+                    vms: [...this.state.vms.slice(0, indexRemoved), ...this.state.vms.slice(indexRemoved + 1)]
+                });
             });
-        });
     };
 
     upgrade = (_id) => {
@@ -160,21 +162,21 @@ class Home extends Component {
                 'Content-Type': 'application/json'
             }
         })
-        .then(res => res.json())
-        .then(resJson => {
-            let indexChange;
-            let vmChange;
-            for (let i = 0; i < this.state.vms.length; i++) {
-                if (this.state.vms[i]._id === resJson._id) {
-                    indexChange = i;
-                    vmChange = this.state.vms[i];
+            .then(res => res.json())
+            .then(resJson => {
+                let indexChange;
+                let vmChange;
+                for (let i = 0; i < this.state.vms.length; i++) {
+                    if (this.state.vms[i]._id === resJson._id) {
+                        indexChange = i;
+                        vmChange = this.state.vms[i];
+                    }
                 }
-            }
-            vmChange.tier++;
-            this.setState({
-                vms: update(this.state.vms, {[indexChange]: {tier: {$set: vmChange.tier}}})
-            });
-        })
+                vmChange.tier++;
+                this.setState({
+                    vms: update(this.state.vms, { [indexChange]: { tier: { $set: vmChange.tier } } })
+                });
+            })
     };
 
     downgrade = (_id) => {
@@ -185,21 +187,21 @@ class Home extends Component {
                 'Content-Type': 'application/json'
             }
         })
-        .then(res => res.json())
-        .then(resJson => {
-            let indexChange;
-            let vmChange;
-            for (let i = 0; i < this.state.vms.length; i++) {
-                if (this.state.vms[i]._id === resJson._id) {
-                    indexChange = i;
-                    vmChange = this.state.vms[i];
+            .then(res => res.json())
+            .then(resJson => {
+                let indexChange;
+                let vmChange;
+                for (let i = 0; i < this.state.vms.length; i++) {
+                    if (this.state.vms[i]._id === resJson._id) {
+                        indexChange = i;
+                        vmChange = this.state.vms[i];
+                    }
                 }
-            }
-            vmChange.tier--;
-            this.setState({
-                vms: update(this.state.vms, {[indexChange]: {tier: {$set: vmChange.tier}}})
-            });
-        })
+                vmChange.tier--;
+                this.setState({
+                    vms: update(this.state.vms, { [indexChange]: { tier: { $set: vmChange.tier } } })
+                });
+            })
     };
 
     render() {
