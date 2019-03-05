@@ -9,7 +9,8 @@ var bodyParser = require("body-parser");
 var userRouter = require("./routes/users");
 var vmRouter = require("./routes/vms");
 
-const mongoose = require("mongoose");
+var vms = require("./routes/index");
+var usersRouter = require("./routes/users");
 
 const dbUri =
   "mongodb://main:se4455@main-shard-00-00-gkrza.mongodb.net:27017,main-shard-00-01-gkrza.mongodb.net:27017,main-shard-00-02-gkrza.mongodb.net:27017/test?ssl=true&replicaSet=Main-shard-0&authSource=admin&retryWrites=true";

@@ -5,6 +5,7 @@ var cookieParser = require("cookie-parser");
 var logger = require("morgan");
 
 var indexRouter = require("./routes/index");
+var vmsRouter = require("./routes/vms")
 var usersRouter = require("./routes/users");
 
 var app = express();
@@ -20,7 +21,16 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, "public")));
 
 app.use("/", indexRouter);
+app.use("/vms", vmsRouter)
 app.use("/user", usersRouter);
+
+
+// Used to connect the dist routes with the express routes. 
+app.get('*', (req, res) => {
+  res.sendFile(path.join(__dirname, 'public/dist/index.html'));
+});
+
+
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
