@@ -20,93 +20,25 @@ class Home extends Component {
             vmName: "",
             vmTier: 0,
             charges: "0.00",
-            vms: [{
-                _id: "1234",
-                ccId: "brandonassing",
-                name: "My VM 1",
-                creationDate: new Date('October 20, 2018 9:24:00'),
-                tier: 1,
-                running: true,
-                usage: [{
-                    startTime: new Date('October 20, 2018 10:24:00'),
-                    endTime: new Date('October 20, 2018 14:28:00')
-                }, {
-                    startTime: new Date('March 4, 2019 12:24:00'),
-                    endTime: null
-                }]
-            },
-            {
-                _id: "1235",
-                name: "VM2",
-                ccId: "brandonassing",
-                creationDate: new Date('November 12, 2018 19:23:21'),
-                tier: 3,
-                running: false,
-                usage: [{
-                    startTime: new Date('October 20, 2018 10:24:00'),
-                    endTime: new Date('October 20, 2018 14:28:00')
-                }, {
-                    startTime: new Date('October 23, 2018 12:24:00'),
-                    endTime: new Date('October 25, 2018 14:28:00')
-                }]
-            },
-            {
-                _id: "1236",
-                name: "Something vm 3",
-                ccId: "brandonassing",
-                creationDate: new Date('January 28, 2019 12:00:39'),
-                tier: 2,
-                running: true,
-                usage: [{
-                    startTime: new Date('March 2, 2019 11:39:23'),
-                    endTime: null
-                }]
-            },
-            {
-                _id: "1237",
-                name: "My VM 4",
-                ccId: "brandonassing",
-                creationDate: new Date('March 1, 2019 13:24:00'),
-                tier: 1,
-                running: false,
-                usage: []
-            },
-            {
-                _id: "1238",
-                name: "My VM 5",
-                ccId: "brandonassing",
-                creationDate: new Date('March 1, 2019 13:24:00'),
-                tier: 1,
-                running: false,
-                usage: []
-            },
-            {
-                _id: "1239",
-                name: "My VM 6",
-                ccId: "brandonassing",
-                creationDate: new Date('March 1, 2019 13:24:00'),
-                tier: 2,
-                running: false,
-                usage: []
-            },
-            {
-                _id: "1240",
-                name: "My VM 7",
-                ccId: "brandonassing",
-                creationDate: new Date('March 1, 2019 13:24:00'),
-                tier: 3,
-                running: false,
-                usage: []
-            }]
+            vms: []
         }
     }
 
     componentDidMount() {
-        //set user
+        // TODO get this from props 
         this.setState({
             loggedInUser: "brandonassing"
+        }, () => {
+            fetch('/vms?ccId=' + this.state.loggedInUser)
+                .then(res => res.json())
+                .then(resJson => {
+                    this.setState({
+                        vms: resJson
+                    }, () => {
+                        this.refresh();
+                    });
+                });
         });
-        this.refresh();
     }
 
     refresh = () => {
@@ -125,7 +57,7 @@ class Home extends Component {
                 charges += vmCharge;
             });
             this.setState({
-                charges: (Math.round(charges*100)/100).toFixed(2)
+                charges: (Math.round(charges * 100) / 100).toFixed(2)
             });
         }
     };
@@ -158,7 +90,7 @@ class Home extends Component {
             vmTier: !!e.target.value ? e.target.value : this.state.vmTier
         });
     };
-
+    //TODO send log out request
     handleLogout = () => {
         this.props.loggedIn(false);
     };
@@ -176,16 +108,16 @@ class Home extends Component {
                 tier: this.state.vmTier
             })
         })
-        .then(res => res.json())
-        .then(resJson => {
-            this.setState({
-                createOpen: false,
-                vmName: "",
-                vmTier: 0,
-                vms: [...this.state.vms, resJson.vm]
+            .then(res => res.json())
+            .then(resJson => {
+                this.setState({
+                    createOpen: false,
+                    vmName: "",
+                    vmTier: 0,
+                    vms: [...this.state.vms, resJson]
+                });
             });
-        });
-        //error catch
+        // TODO error catch
     };
 
     startStop = (id, running) => {
@@ -210,7 +142,6 @@ class Home extends Component {
     };
 
     render() {
-        // TODO only show VM for user that created
         let tierDescription;
         if (this.state.vmTier === 1) {
             tierDescription = (
@@ -251,8 +182,8 @@ class Home extends Component {
                             <button id="refresh-button-main" className="refresh-button" onClick={this.refresh}>refresh</button>
                             <h3 id="username"><span>user: </span>{this.state.loggedInUser}</h3>
                             {/* <Link to="/login" style={{ textDecoration: 'none' }}> */}
-                                <Button classes={{ root: 'logout-button' }} variant="outlined" onClick={this.handleLogout}>
-                                    Logout
+                            <Button classes={{ root: 'logout-button' }} variant="outlined" onClick={this.handleLogout}>
+                                Logout
                                 </Button>
                             {/* </Link> */}
                         </div>
@@ -282,11 +213,14 @@ class Home extends Component {
                         </h2>
                         </div>
                         {
-                            this.state.vms.map((item) => {
-                                return (
-                                    <VM key={item._id} _id={item._id} name={item.name} creationDate={item.creationDate} tier={item.tier} running={item.running} usage={item.usage} startStop={this.startStop} delete={this.delete} upgrade={this.upgrade} downgrade={this.downgrade} />
-                                )
-                            })
+                            this.state.vms.length > 0 ?
+                                this.state.vms.map((item) => {
+                                    return (
+                                        <VM key={item._id} _id={item._id} name={item.name} creationDate={item.creationDate} tier={item.tier} running={item.running} usage={item.usage} startStop={this.startStop} delete={this.delete} upgrade={this.upgrade} downgrade={this.downgrade} />
+                                    )
+                                })
+                                :
+                                ""
                         }
                     </div>
                 </div>

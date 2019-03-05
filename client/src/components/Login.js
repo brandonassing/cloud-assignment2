@@ -80,7 +80,6 @@ class Login extends Component {
                             //     className: "input-label"
                             // }}
                         />
-                        {/* TODO can still click on text in button */}
                         {/* <Link to="/" style={{ textDecoration: 'none' }}> */}
                             <Button 
                             classes={{ root: 'login-button' }} 
