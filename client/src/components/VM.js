@@ -17,6 +17,13 @@ class VM extends Component {
     componentDidMount() {
         this.refresh();
     }
+
+    componentDidUpdate(prevProps) {
+        if(this.props.usage !== prevProps.usage) {
+            this.refresh();
+        }
+    }
+
     handleOpen = () => {
         this.setState({ detailsOpen: true });
     };
@@ -51,7 +58,7 @@ class VM extends Component {
         if (this.props.usage.length !== 0) {
             this.props.usage.forEach((use) => {
                 let endTime = use.endTime !== null ? use.endTime : Date.now();
-                duration = moment.duration(moment(endTime).diff(moment(use.startTime))).asMinutes();
+                duration += moment.duration(moment(endTime).diff(moment(use.startTime))).asMinutes();
                 vmCharge += duration * (tier === 1 ? 0.05 : (tier === 2 ? 0.1 : 0.15));
             });
         }

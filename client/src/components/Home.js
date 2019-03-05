@@ -12,6 +12,7 @@ import moment from 'moment';
 
 // LEGACY REACT FUNC. USED BY UP/DOWNGRADE
 import update from 'react-addons-update';
+import { resetWarningCache } from 'prop-types';
 
 class Home extends Component {
     constructor(props) {
@@ -32,37 +33,37 @@ class Home extends Component {
         this.setState({
             loggedInUser: "brandonassing"
         }, () => {
-            fetch('/vms?ccId=' + this.state.loggedInUser)
-                .then(res => res.json())
-                .then(resJson => {
-                    this.setState({
-                        vms: resJson
-                    }, () => {
-                        this.refresh();
-                    });
-                });
+            this.refresh();
         });
     }
 
     refresh = () => {
-        if (this.state.vms.length !== 0) {
-            let charges = 0.00;
-            this.state.vms.forEach((vm) => {
-                let vmCharge = 0.00;
-                let tier = vm.tier;
-                if (vm.usage.length !== 0) {
-                    vm.usage.forEach((use) => {
-                        let endTime = use.endTime !== null ? use.endTime : Date.now();
-                        let duration = moment.duration(moment(endTime).diff(moment(use.startTime))).asMinutes();
-                        vmCharge += duration * (tier === 1 ? 0.05 : (tier === 2 ? 0.1 : 0.15));
-                    });
-                }
-                charges += vmCharge;
+        fetch('/vms?ccId=' + this.state.loggedInUser)
+            .then(res => res.json())
+            .then(resJson => {
+                this.setState({
+                    vms: resJson
+                }, () => {
+                    if (this.state.vms.length !== 0) {
+                        let charges = 0.00;
+                        this.state.vms.forEach((vm) => {
+                            let vmCharge = 0.00;
+                            let tier = vm.tier;
+                            if (vm.usage.length !== 0) {
+                                vm.usage.forEach((use) => {
+                                    let endTime = use.endTime !== null ? use.endTime : Date.now();
+                                    let duration = moment.duration(moment(endTime).diff(moment(use.startTime))).asMinutes();
+                                    vmCharge += duration * (tier === 1 ? 0.05 : (tier === 2 ? 0.1 : 0.15));
+                                });
+                            }
+                            charges += vmCharge;
+                        });
+                        this.setState({
+                            charges: (Math.round(charges * 100) / 100).toFixed(2)
+                        });
+                    }
+                });
             });
-            this.setState({
-                charges: (Math.round(charges * 100) / 100).toFixed(2)
-            });
-        }
     };
 
     handleNameChange = (e) => {
@@ -125,10 +126,47 @@ class Home extends Component {
 
     startStop = (_id, running) => {
         if (running) {
-            console.log("Stopping " + _id);
+            fetch('/vms/stop/' + _id, {
+                method: 'PUT',
+                headers: {
+                    'Accept': 'application/json',
+                    'Content-Type': 'application/json'
+                }
+            })
+                .then(res => res.json())
+                .then(resJson => {
+                    let indexChange;
+                    for (let i = 0; i < this.state.vms.length; i++) {
+                        if (this.state.vms[i]._id === resJson._id) {
+                            indexChange = i;
+                        }
+                    }
+                    this.setState({
+                        vms: update(this.state.vms, { [indexChange]: { usage: { $set: resJson.usage }, running: { $set: resJson.running } } })
+                    });
+                });
         }
         else {
-            console.log("Starting " + _id);
+            fetch('/vms/start/' + _id, {
+                method: 'PUT',
+                headers: {
+                    'Accept': 'application/json',
+                    'Content-Type': 'application/json'
+                }
+            })
+                .then(res => res.json())
+                .then(resJson => {
+                    let indexChange;
+                    for (let i = 0; i < this.state.vms.length; i++) {
+                        if (this.state.vms[i]._id === resJson._id) {
+                            indexChange = i;
+                        }
+                    }
+                    this.setState({
+                        vms: update(this.state.vms, { [indexChange]: { usage: { $set: resJson.usage }, running: { $set: resJson.running } } })
+                    });
+                });
+
         }
     };
 
@@ -151,6 +189,7 @@ class Home extends Component {
                 this.setState({
                     vms: [...this.state.vms.slice(0, indexRemoved), ...this.state.vms.slice(indexRemoved + 1)]
                 });
+
             });
     };
 
@@ -202,6 +241,7 @@ class Home extends Component {
                     vms: update(this.state.vms, { [indexChange]: { tier: { $set: vmChange.tier } } })
                 });
             })
+
     };
 
     render() {
