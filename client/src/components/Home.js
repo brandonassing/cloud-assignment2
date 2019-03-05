@@ -152,11 +152,53 @@ class Home extends Component {
     };
 
     upgrade = (_id) => {
-        console.log('upgrade ' + _id);
+        fetch('/vm/upgrade/' + _id, {
+            method: 'PUT',
+            Headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
+            }
+        })
+        .then(res => res.json())
+        .then(resJson => {
+            let indexChange;
+            let vmChange;
+            for (let i = 0; i < this.state.vms.length; i++) {
+                if (this.state.vms[i]._id === resJson._id) {
+                    indexChange = i;
+                    vmChange = this.state.vms[i];
+                }
+            }
+            vmChange.tier++;
+            this.setState({
+                vms: [...this.state.vms.slice(0, indexChange), ...vmChange , ...this.state.vms.slice(indexChange + 1)]
+            });
+        })
     };
 
     downgrade = (_id) => {
-        console.log('downgrade ' + _id);
+        fetch('/vm/downgrade/' + _id, {
+            method: 'PUT',
+            Headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
+            }
+        })
+        .then(res => res.json())
+        .then(resJson => {
+            let indexChange;
+            let vmChange;
+            for (let i = 0; i < this.state.vms.length; i++) {
+                if (this.state.vms[i]._id === resJson._id) {
+                    indexChange = i;
+                    vmChange = this.state.vms[i];
+                }
+            }
+            vmChange.tier--;
+            this.setState({
+                vms: [...this.state.vms.slice(0, indexChange), ...vmChange , ...this.state.vms.slice(indexChange + 1)]
+            });
+        })
     };
 
     render() {
