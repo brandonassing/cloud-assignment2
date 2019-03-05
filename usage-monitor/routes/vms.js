@@ -4,24 +4,18 @@ const Vm = require("../models/Vm");
 
 // GET: return all VMs from Mongo
 router.get("/all", function(req, res) {
-  // -------------------- Talk to Mongo here --------------------
-  // Vm.find({}, (err, vm) => {
-  //   console.log("get request");
-  //   if (err) {
-  //     res.status(500).send(err);
-  //   }
-  //   res.status(200).json(vm);
-  // });
-
-  var response = {};
-  response.test = "List of all vms";
-  res.send(response);
+  Vm.find({}, (err, vm) => {
+    if (err) {
+      res.status(500).send(err);
+    }
+    res.status(200).json(vm);
+  });
 });
 
 // Get: return the usage metrics for a vm
 router.get("/usage", function(req, res) {
   // -------------------- Talk to Mongo here --------------------
-
+  console.log(req);
   var response = {};
   response.test = "get usage metrics";
   res.send(response);
