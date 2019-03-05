@@ -123,7 +123,7 @@ class VM extends Component {
                     <Button classes={{ root: 'vm-button start-button' }} onClick={this.handleStartStop}>
                         {!running ? "Start" : "Stop"}
                     </Button>
-                    <Button classes={{ root: 'vm-button delete-button' }} onClick={this.handleDelete}>
+                    <Button classes={{ root: 'vm-button delete-button' }} onClick={this.handleDelete} disabled={running}>
                         Delete
                     </Button>
                 </div>
