@@ -20,16 +20,18 @@ class App extends Component {
       .then(res => res.json())
       .then(resJson => {
         let loggedIn = false;
+        let username = "";
         if (resJson.length !== 0) {
           resJson.forEach((user) => {
             if (user.loggedIn) {
               loggedIn = true;
+              username = user.username
             }
           });
         }
         this.setState({
           isAuthenticated: loggedIn,
-          username: ""
+          username: username
         });
       });
   }
