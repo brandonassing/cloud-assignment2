@@ -4,7 +4,6 @@ const User = require("../models/user");
 
 // GET: Retrieve all users.
 router.get("/", function(req, res, next) {
-  console.log("HELO");
   User.find({}, (err, users) => {
     if (err) {
       res.status(500).send(err);
@@ -30,14 +29,21 @@ router.put("/login", function(req, res) {
   );
 });
 
-router.post("/", function(req, res) {
-  let newUser = new User();
-  newUser.save((err, user) => {
-    if (err) {
-      res.status(500).send(err);
+router.put("/logout", function(req, res) {
+  User.findOneAndUpdate(
+    { username: req.body.username },
+    {
+      loggedIn: false
+    },
+    {},
+    function(err, user) {
+      if (err || user == null) {
+        res.send({ error: true });
+      } else {
+        res.send({ error: false });
+      }
     }
-    res.status(201).json(user);
-  });
+  );
 });
 
 module.exports = router;
