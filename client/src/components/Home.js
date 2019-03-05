@@ -164,11 +164,28 @@ class Home extends Component {
     };
 
     createVM = () => {
-        this.setState({
-            createOpen: false,
-            vmName: "",
-            vmTier: 0
+        fetch('/vms/create', {
+            method: 'POST',
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                ccId: this.state.loggedInUser,
+                name: this.state.vmName,
+                tier: this.state.vmTier
+            })
+        })
+        .then(res => res.json())
+        .then(resJson => {
+            this.setState({
+                createOpen: false,
+                vmName: "",
+                vmTier: 0,
+                vms: [...this.state.vms, resJson.vm]
+            });
         });
+        //error catch
     };
 
     startStop = (id, running) => {
