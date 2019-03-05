@@ -17,6 +17,13 @@ class VM extends Component {
     componentDidMount() {
         this.refresh();
     }
+
+    componentDidUpdate(prevProps) {
+        if(this.props.usage !== prevProps.usage) {
+            this.refresh();
+        }
+    }
+
     handleOpen = () => {
         this.setState({ detailsOpen: true });
     };

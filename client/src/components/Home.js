@@ -33,38 +33,37 @@ class Home extends Component {
         this.setState({
             loggedInUser: "brandonassing"
         }, () => {
-            fetch('/vms?ccId=' + this.state.loggedInUser)
-                .then(res => res.json())
-                .then(resJson => {
-                    this.setState({
-                        vms: resJson
-                    }, () => {
-                        this.refresh();
-                    });
-                });
+            this.refresh();
         });
     }
 
-    // TODO have refresh fetch all vms again and refresh everything
     refresh = () => {
-        if (this.state.vms.length !== 0) {
-            let charges = 0.00;
-            this.state.vms.forEach((vm) => {
-                let vmCharge = 0.00;
-                let tier = vm.tier;
-                if (vm.usage.length !== 0) {
-                    vm.usage.forEach((use) => {
-                        let endTime = use.endTime !== null ? use.endTime : Date.now();
-                        let duration = moment.duration(moment(endTime).diff(moment(use.startTime))).asMinutes();
-                        vmCharge += duration * (tier === 1 ? 0.05 : (tier === 2 ? 0.1 : 0.15));
-                    });
-                }
-                charges += vmCharge;
+        fetch('/vms?ccId=' + this.state.loggedInUser)
+            .then(res => res.json())
+            .then(resJson => {
+                this.setState({
+                    vms: resJson
+                }, () => {
+                    if (this.state.vms.length !== 0) {
+                        let charges = 0.00;
+                        this.state.vms.forEach((vm) => {
+                            let vmCharge = 0.00;
+                            let tier = vm.tier;
+                            if (vm.usage.length !== 0) {
+                                vm.usage.forEach((use) => {
+                                    let endTime = use.endTime !== null ? use.endTime : Date.now();
+                                    let duration = moment.duration(moment(endTime).diff(moment(use.startTime))).asMinutes();
+                                    vmCharge += duration * (tier === 1 ? 0.05 : (tier === 2 ? 0.1 : 0.15));
+                                });
+                            }
+                            charges += vmCharge;
+                        });
+                        this.setState({
+                            charges: (Math.round(charges * 100) / 100).toFixed(2)
+                        });
+                    }
+                });
             });
-            this.setState({
-                charges: (Math.round(charges * 100) / 100).toFixed(2)
-            });
-        }
     };
 
     handleNameChange = (e) => {
