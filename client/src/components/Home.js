@@ -9,6 +9,7 @@ import TextField from '@material-ui/core/TextField';
 import Menu from '@material-ui/core/Menu';
 import MenuItem from '@material-ui/core/MenuItem';
 import moment from 'moment';
+import update from 'react-addons-update';
 
 class Home extends Component {
     constructor(props) {
@@ -132,7 +133,7 @@ class Home extends Component {
     delete = (_id) => {
         fetch('/vms/' + _id, {
             method: 'DELETE',
-            Headers: {
+            headers: {
                 'Accept': 'application/json',
                 'Content-Type': 'application/json'
             }
@@ -152,9 +153,9 @@ class Home extends Component {
     };
 
     upgrade = (_id) => {
-        fetch('/vm/upgrade/' + _id, {
+        fetch('/vms/upgrade/' + _id, {
             method: 'PUT',
-            Headers: {
+            headers: {
                 'Accept': 'application/json',
                 'Content-Type': 'application/json'
             }
@@ -171,15 +172,15 @@ class Home extends Component {
             }
             vmChange.tier++;
             this.setState({
-                vms: [...this.state.vms.slice(0, indexChange), ...vmChange , ...this.state.vms.slice(indexChange + 1)]
+                vms: update(this.state.vms, {[indexChange]: {tier: {$set: vmChange.tier}}})
             });
         })
     };
 
     downgrade = (_id) => {
-        fetch('/vm/downgrade/' + _id, {
+        fetch('/vms/downgrade/' + _id, {
             method: 'PUT',
-            Headers: {
+            headers: {
                 'Accept': 'application/json',
                 'Content-Type': 'application/json'
             }
@@ -196,7 +197,7 @@ class Home extends Component {
             }
             vmChange.tier--;
             this.setState({
-                vms: [...this.state.vms.slice(0, indexChange), ...vmChange , ...this.state.vms.slice(indexChange + 1)]
+                vms: update(this.state.vms, {[indexChange]: {tier: {$set: vmChange.tier}}})
             });
         })
     };
