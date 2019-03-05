@@ -96,7 +96,7 @@ class Home extends Component {
     };
 
     createVM = () => {
-        fetch('/vms/create', {
+        fetch('/vms', {
             method: 'POST',
             headers: {
                 'Accept': 'application/json',
@@ -130,7 +130,19 @@ class Home extends Component {
     };
 
     delete = (id) => {
-        console.log('delete ' + id);
+        fetch('/vms/' + id, {
+            method: 'DELETE',
+            Headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
+            }
+        })
+        .then(res => res.json())
+        .then(resJson => {
+            this.setState({
+                vms: []
+            });
+        });
     };
 
     upgrade = (id) => {
