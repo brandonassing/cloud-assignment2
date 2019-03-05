@@ -61,7 +61,6 @@ class VM extends Component {
     };
 
     render() {
-        // TODO disable scale if running
         const { _id, name, creationDate, tier, running, usage } = this.props;
 
         let vmMetadata = (

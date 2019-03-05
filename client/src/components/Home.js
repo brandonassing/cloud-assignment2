@@ -142,7 +142,6 @@ class Home extends Component {
     };
 
     render() {
-        // TODO only show VM for user that created
         let tierDescription;
         if (this.state.vmTier === 1) {
             tierDescription = (
