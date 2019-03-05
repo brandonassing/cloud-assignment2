@@ -15,4 +15,4 @@ var VmSchema = new Schema({
   ]
 });
 
-module.exports = mongoose.model("VM", VmSchema);
+module.exports = mongoose.model("Vms", VmSchema);
