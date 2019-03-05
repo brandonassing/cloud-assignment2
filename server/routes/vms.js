@@ -20,7 +20,7 @@ router.get("/", function(req, res) {
   request(options, function(error, response, body) {
     if (error) {
       res.status(500);
-      res.send("error yo");
+      res.send(error);
     } else {
       res.send(body);
     }
