@@ -1,80 +1,79 @@
 var express = require("express");
 var router = express.Router();
-var User = require("../models/user");
+
+var config = require("../config/config.js");
+const request = require("request");
 
 // GET: return all users
 router.get("/", function(req, res) {
-  var query = {};
-  User.find({}, {}, query, function(err, data) {
-    // Mongo command to fetch all data from collection.
-    if (err) {
-      response = {
-        error: true,
-        message: "Error fetching data"
-      };
+  // Build HTTP object
+  var options = {
+    method: "GET",
+    url: config["cloud-usage-monitor"] + "/users",
+    json: true
+  };
+
+  // Send HTTP object
+  request(options, function(error, response, body) {
+    if (error) {
+      res.status(500);
+      res.send(error);
     } else {
-      response = {
-        data: data
-      };
+      res.send(body);
     }
-    res.json(response);
   });
 });
 
 // PUt: Login
 router.put("/login", function(req, res) {
   // Build HTTP object
-  var options = {}  
+  var options = {};
 
-  var body = {}
-  body.model = "a model"
+  var body = {};
+  body.model = "a model";
 
-  var options = { 
+  var options = {
     body: body,
-    method: 'PUT',
+    method: "PUT",
     url: config["mongo-url"] + "optional",
-    json: true 
+    json: true
   };
 
   // Send HTTP object
-  request(options, function (error, response, body) {
+  request(options, function(error, response, body) {
     if (error) {
-        res.status(500)
-        res.send("error yo")
-    }else{
-
-      res.send(body)     
+      res.status(500);
+      res.send("error yo");
+    } else {
+      res.send(body);
     }
-
-  })
+  });
 });
 
 // PUT: Logout
 router.put("/logout", function(req, res) {
   // Build HTTP object
-  var options = {}  
+  var options = {};
 
-  var body = {}
-  body.model = "a model"
+  var body = {};
+  body.model = "a model";
 
-  var options = { 
+  var options = {
     body: body,
-    method: 'PUT',
+    method: "PUT",
     url: config["mongo-url"] + "optional",
-    json: true 
+    json: true
   };
 
   // Send HTTP object
-  request(options, function (error, response, body) {
+  request(options, function(error, response, body) {
     if (error) {
-        res.status(500)
-        res.send("error yo")
-    }else{
-
-      res.send(body)     
+      res.status(500);
+      res.send("error yo");
+    } else {
+      res.send(body);
     }
-
-  })
+  });
 });
 
 module.exports = router;

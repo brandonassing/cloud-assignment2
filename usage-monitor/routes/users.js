@@ -4,18 +4,15 @@ const User = require("../models/user");
 
 // GET: Retrieve all users.
 router.get("/", function(req, res, next) {
-  User.find({}, (err, user) => {
-    console.log("get request");
+  User.find({}, (err, users) => {
     if (err) {
       res.status(500).send(err);
     }
-    res.status(200).json(user);
+    res.send(users);
   });
 });
 
 router.post("/", function(req, res) {
-  console.log("post request");
-  console.log(req);
   let newUser = new User();
   newUser.save((err, user) => {
     if (err) {
