@@ -13,21 +13,21 @@ router.get("/", function(req, res) {
 });
 
 // Get: return the usage metrics for a vm
-router.get("/usage", function(req, res) {
-  // -------------------- Talk to Mongo here --------------------
-  var response = {};
-  response.test = "get usage metrics";
-  res.send(response);
-});
+// router.get("/usage", function(req, res) {
+//   // -------------------- Talk to Mongo here --------------------
+//   var response = {};
+//   response.test = "get usage metrics";
+//   res.send(response);
+// });
 
 // Get: retur the total charges for a vm
-router.get("/charges", function(req, res) {
-  // -------------------- Talk to Mongo here --------------------
+// router.get("/charges", function(req, res) {
+//   // -------------------- Talk to Mongo here --------------------
 
-  var response = {};
-  response.test = "get charges";
-  res.send(response);
-});
+//   var response = {};
+//   response.test = "get charges";
+//   res.send(response);
+// });
 
 // POST: Create new VM
 router.post("/create", function(req, res) {
