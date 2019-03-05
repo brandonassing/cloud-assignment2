@@ -10,8 +10,6 @@ const request = require("request");
 // GET: return
 router.get("/", function(req, res) {
   // Build HTTP object
-  var options = {};
-
   var options = {
     method: "GET",
     url: config["cloud-usage-monitor"] + "/vms?ccId=" + req.query.ccId,
@@ -29,57 +27,10 @@ router.get("/", function(req, res) {
   });
 });
 
-// // Get: return the usage metrics for a vm
-// router.get("/usage", function(req, res) {
-//   // Build HTTP object
-//   var options = {};
-
-//   var options = {
-//     method: "GET",
-//     url: config["cloud-usage-monitor"] + "/vms/usage",
-//     json: true
-//   };
-
-//   // Send HTTP object
-//   request(options, function(error, response, body) {
-//     if (error) {
-//       res.status(500);
-//       res.send("error yo");
-//     } else {
-//       res.send(body);
-//     }
-//   });
-// });
-
-// Get: retur the total charges for a vm
-// router.get("/charges", function(req, res) {
-//   // Build HTTP object
-//   var options = {};
-
-//   var options = {
-//     method: "GET",
-//     url: config["cloud-usage-monitor"] + "/vms/charges",
-//     json: true
-//   };
-
-//   // Send HTTP object
-//   request(options, function(error, response, body) {
-//     if (error) {
-//       res.status(500);
-//       res.send("error yo");
-//     } else {
-//       res.send(body);
-//     }
-//   });
-// });
-
 // POST: Create new VM
 router.post("/", function(req, res) {
   // Build HTTP object
-  var options = {};
-
   var body = req.body;
-  //  body.model = "a model"
 
   var options = {
     body: body,
@@ -92,7 +43,7 @@ router.post("/", function(req, res) {
   request(options, function(error, response, body) {
     if (error) {
       res.status(500);
-      res.send("error yo");
+      res.send(error);
     } else {
       res.send(body);
     }
@@ -102,10 +53,7 @@ router.post("/", function(req, res) {
 // PUT: start a VM
 router.put("/start/:_id", function(req, res) {
   // Build HTTP object
-  var options = {};
-
   var body = {};
-  body.model = "a model";
 
   var options = {
     body: body,
@@ -118,7 +66,7 @@ router.put("/start/:_id", function(req, res) {
   request(options, function(error, response, body) {
     if (error) {
       res.status(500);
-      res.send("error yo");
+      res.send(error);
     } else {
       res.send(body);
     }
@@ -128,10 +76,7 @@ router.put("/start/:_id", function(req, res) {
 // PUT: Stop a VM
 router.put("/stop/:_id", function(req, res) {
   // Build HTTP object
-  var options = {};
-
   var body = {};
-  body.model = "a model";
 
   var options = {
     body: body,
@@ -144,7 +89,7 @@ router.put("/stop/:_id", function(req, res) {
   request(options, function(error, response, body) {
     if (error) {
       res.status(500);
-      res.send("error yo");
+      res.send(error);
     } else {
       res.send(body);
     }
@@ -154,10 +99,7 @@ router.put("/stop/:_id", function(req, res) {
 // PUT: Upgrade a VM
 router.put("/upgrade/:_id", function(req, res) {
   // Build HTTP object
-  var options = {};
-
   var body = {};
-  body.model = "a model";
 
   var options = {
     body: body,
@@ -170,7 +112,7 @@ router.put("/upgrade/:_id", function(req, res) {
   request(options, function(error, response, body) {
     if (error) {
       res.status(500);
-      res.send("error yo");
+      res.send(error);
     } else {
       res.send(body);
     }
@@ -180,10 +122,7 @@ router.put("/upgrade/:_id", function(req, res) {
 // PUT: Downgrade a VM
 router.put("/downgrade/:_id", function(req, res) {
   // Build HTTP object
-  var options = {};
-
   var body = {};
-  body.model = "a model";
 
   var options = {
     body: body,
@@ -196,7 +135,7 @@ router.put("/downgrade/:_id", function(req, res) {
   request(options, function(error, response, body) {
     if (error) {
       res.status(500);
-      res.send("error yo");
+      res.send(error);
     } else {
       res.send(body);
     }
@@ -206,10 +145,7 @@ router.put("/downgrade/:_id", function(req, res) {
 // DELETE:
 router.delete("/:_id", function(req, res) {
   // Build HTTP object
-  var options = {};
-
   var body = {};
-  body.model = "a model";
 
   var options = {
     body: body,
@@ -222,7 +158,7 @@ router.delete("/:_id", function(req, res) {
   request(options, function(error, response, body) {
     if (error) {
       res.status(500);
-      res.send("error yo");
+      res.send(error);
     } else {
       res.send(body);
     }
