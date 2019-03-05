@@ -152,7 +152,7 @@ router.put("/stop", function(req, res) {
 });
 
 // PUT: Upgrade a VM
-router.put("/upgrade", function(req, res) {
+router.put("/upgrade/:_id", function(req, res) {
   // Build HTTP object
   var options = {};
 
@@ -162,7 +162,7 @@ router.put("/upgrade", function(req, res) {
   var options = {
     body: body,
     method: "PUT",
-    url: config["cloud-usage-monitor"] + "/vms/upgrade",
+    url: config["cloud-usage-monitor"] + "/vms/upgrade/" + req.params._id,
     json: true
   };
 
@@ -178,7 +178,7 @@ router.put("/upgrade", function(req, res) {
 });
 
 // PUT: Downgrade a VM
-router.put("/downgrade", function(req, res) {
+router.put("/downgrade/:_id", function(req, res) {
   // Build HTTP object
   var options = {};
 
@@ -188,7 +188,7 @@ router.put("/downgrade", function(req, res) {
   var options = {
     body: body,
     method: "PUT",
-    url: config["cloud-usage-monitor"] + "/vms/downgrade",
+    url: config["cloud-usage-monitor"] + "/vms/downgrade/" + req.params._id,
     json: true
   };
 
