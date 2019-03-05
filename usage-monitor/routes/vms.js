@@ -1,10 +1,10 @@
 var express = require("express");
 var router = express.Router();
-const Vm = require("../models/Vm");
+const Vm = require("../models/vm");
 
-// GET: return all VMs from Mongo
-router.get("/all", function(req, res) {
-  Vm.find({}, (err, vm) => {
+// GET: return VMs for a user
+router.get("/", function(req, res) {
+  Vm.find({ ccId: req.query.ccId }, (err, vm) => {
     if (err) {
       res.status(500).send(err);
     }
@@ -15,7 +15,6 @@ router.get("/all", function(req, res) {
 // Get: return the usage metrics for a vm
 router.get("/usage", function(req, res) {
   // -------------------- Talk to Mongo here --------------------
-  console.log(req);
   var response = {};
   response.test = "get usage metrics";
   res.send(response);
@@ -32,22 +31,22 @@ router.get("/charges", function(req, res) {
 
 // POST: Create new VM
 router.post("/create", function(req, res) {
-  // -------------------- Talk to Mongo here --------------------
-  console.log("post request");
-  console.log(req);
-  let newVm = new Vm();
+  var vm = {
+    name: req.body.name,
+    ccId: req.body.ccId,
+    creationDate: new Date(),
+    tier: req.body.tier,
+    running: false,
+    usage: []
+  };
+
+  let newVm = new Vm(vm);
   newVm.save((err, vm) => {
     if (err) {
       res.status(500).send(err);
     }
     res.status(201).json(vm);
   });
-
-  console.log("made it to create");
-
-  var response = {};
-  response.test = "create a vm";
-  res.send(response);
 });
 
 // PUT: start a VM
