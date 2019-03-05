@@ -10,6 +10,9 @@ import Menu from '@material-ui/core/Menu';
 import MenuItem from '@material-ui/core/MenuItem';
 import moment from 'moment';
 
+// LEGACY REACT FUNC. USED BY UP/DOWNGRADE
+import update from 'react-addons-update';
+
 class Home extends Component {
     constructor(props) {
         super(props);
@@ -96,7 +99,7 @@ class Home extends Component {
     };
 
     createVM = () => {
-        fetch('/vms/create', {
+        fetch('/vms', {
             method: 'POST',
             headers: {
                 'Accept': 'application/json',
@@ -120,25 +123,85 @@ class Home extends Component {
         // TODO error catch
     };
 
-    startStop = (id, running) => {
+    startStop = (_id, running) => {
         if (running) {
-            console.log("Stopping " + id);
+            console.log("Stopping " + _id);
         }
         else {
-            console.log("Starting " + id);
+            console.log("Starting " + _id);
         }
     };
 
-    delete = (id) => {
-        console.log('delete ' + id);
+    delete = (_id) => {
+        fetch('/vms/' + _id, {
+            method: 'DELETE',
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
+            }
+        })
+            .then(res => res.json())
+            .then(resJson => {
+                let indexRemoved;
+                for (let i = 0; i < this.state.vms.length; i++) {
+                    if (this.state.vms[i]._id === resJson._id) {
+                        indexRemoved = i;
+                    }
+                }
+                this.setState({
+                    vms: [...this.state.vms.slice(0, indexRemoved), ...this.state.vms.slice(indexRemoved + 1)]
+                });
+            });
     };
 
-    upgrade = (id) => {
-        console.log('upgrade ' + id);
+    upgrade = (_id) => {
+        fetch('/vms/upgrade/' + _id, {
+            method: 'PUT',
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
+            }
+        })
+            .then(res => res.json())
+            .then(resJson => {
+                let indexChange;
+                let vmChange;
+                for (let i = 0; i < this.state.vms.length; i++) {
+                    if (this.state.vms[i]._id === resJson._id) {
+                        indexChange = i;
+                        vmChange = this.state.vms[i];
+                    }
+                }
+                vmChange.tier++;
+                this.setState({
+                    vms: update(this.state.vms, { [indexChange]: { tier: { $set: vmChange.tier } } })
+                });
+            })
     };
 
-    downgrade = (id) => {
-        console.log('downgrade ' + id);
+    downgrade = (_id) => {
+        fetch('/vms/downgrade/' + _id, {
+            method: 'PUT',
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
+            }
+        })
+            .then(res => res.json())
+            .then(resJson => {
+                let indexChange;
+                let vmChange;
+                for (let i = 0; i < this.state.vms.length; i++) {
+                    if (this.state.vms[i]._id === resJson._id) {
+                        indexChange = i;
+                        vmChange = this.state.vms[i];
+                    }
+                }
+                vmChange.tier--;
+                this.setState({
+                    vms: update(this.state.vms, { [indexChange]: { tier: { $set: vmChange.tier } } })
+                });
+            })
     };
 
     render() {

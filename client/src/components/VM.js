@@ -9,7 +9,8 @@ class VM extends Component {
         super(props);
         this.state = {
             detailsOpen: false,
-            charges: "0.00"
+            charges: "0.00",
+            duration: "0.00"
         }
     }
 
@@ -45,23 +46,25 @@ class VM extends Component {
     refresh = () => {
         let charges = 0.00;
         let vmCharge = 0.00;
+        let duration = 0;
         let tier = this.props.tier;
         if (this.props.usage.length !== 0) {
             this.props.usage.forEach((use) => {
                 let endTime = use.endTime !== null ? use.endTime : Date.now();
-                let duration = moment.duration(moment(endTime).diff(moment(use.startTime))).asMinutes();
+                duration = moment.duration(moment(endTime).diff(moment(use.startTime))).asMinutes();
                 vmCharge += duration * (tier === 1 ? 0.05 : (tier === 2 ? 0.1 : 0.15));
             });
         }
         charges += vmCharge;
         this.setState({
-            charges: (Math.round(charges * 100) / 100).toFixed(2)
+            charges: (Math.round(charges * 100) / 100).toFixed(2),
+            duration: (Math.round(duration * 100) / 100).toFixed(2)
         });
 
     };
 
     render() {
-        const { _id, name, creationDate, tier, running, usage } = this.props;
+        const { _id, name, creationDate, tier, running } = this.props;
 
         let vmMetadata = (
             <div>
@@ -109,7 +112,7 @@ class VM extends Component {
                 <h2 className="vm-title">{name} <span>- {tier === 1 ? "Basic" : (tier === 2 ? "Large" : "Ultra-large")}</span></h2>
                 <button className="details-button" onClick={() => this.setState({ detailsOpen: true })}>more details</button>
                 <p><strong>Creation:</strong> {moment(creationDate).format("DD MMM YYYY, h:mm:ss a")}</p>
-                <div className="usage-group"><p><strong>Usage charge:</strong> $ {this.state.charges}</p><button className="refresh-button" onClick={this.refresh}>refresh</button></div>
+                <div className="usage-group"><p><strong>Usage:</strong> {this.state.duration} mins</p><button className="refresh-button" onClick={this.refresh}>refresh</button></div>
                 <div id="vm-upgrade-group" className="vm-button-group">
                     <Button classes={{ root: 'vm-button upgrade-button' }} onClick={this.handleDowngrade} disabled={running || tier === 1}>
                         Downgrade
