@@ -20,7 +20,7 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, "public")));
 
 app.use("/vms", vmsRouter);
-app.use("/user", usersRouter);
+app.use("/users", usersRouter);
 
 // Used to connect the dist routes with the express routes.
 app.get("*", (req, res) => {
