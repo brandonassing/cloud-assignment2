@@ -12,6 +12,7 @@ import moment from 'moment';
 
 // LEGACY REACT FUNC. USED BY UP/DOWNGRADE
 import update from 'react-addons-update';
+import { resetWarningCache } from 'prop-types';
 
 class Home extends Component {
     constructor(props) {
@@ -125,10 +126,46 @@ class Home extends Component {
 
     startStop = (_id, running) => {
         if (running) {
-            console.log("Stopping " + _id);
+            fetch('/vms/stop/' + _id, {
+                method: 'PUT',
+                headers: {
+                    'Accept': 'application/json',
+                    'Content-Type': 'application/json'
+                }
+            })
+                .then(res => res.json())
+                .then(resJson => {
+                    let indexChange;
+                    for (let i = 0; i < this.state.vms.length; i++) {
+                        if (this.state.vms[i]._id === resJson._id) {
+                            indexChange = i;
+                        }
+                    }
+                    this.setState({
+                        vms: update(this.state.vms, { [indexChange]: { usage: { $set: resJson.usage }, running: { $set: resJson.running } } })
+                    });
+                });
         }
         else {
-            console.log("Starting " + _id);
+            fetch('/vms/start/' + _id, {
+                method: 'PUT',
+                headers: {
+                    'Accept': 'application/json',
+                    'Content-Type': 'application/json'
+                }
+            })
+                .then(res => res.json())
+                .then(resJson => {
+                    let indexChange;
+                    for (let i = 0; i < this.state.vms.length; i++) {
+                        if (this.state.vms[i]._id === resJson._id) {
+                            indexChange = i;
+                        }
+                    }
+                    this.setState({
+                        vms: update(this.state.vms, { [indexChange]: { usage: { $set: resJson.usage }, running: { $set: resJson.running } } })
+                    });
+                });
         }
     };
 
