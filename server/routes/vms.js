@@ -100,7 +100,7 @@ router.post("/", function(req, res) {
 });
 
 // PUT: start a VM
-router.put("/start", function(req, res) {
+router.put("/start/:_id", function(req, res) {
   // Build HTTP object
   var options = {};
 
@@ -110,7 +110,7 @@ router.put("/start", function(req, res) {
   var options = {
     body: body,
     method: "PUT",
-    url: config["cloud-usage-monitor"] + "/vms/start",
+    url: config["cloud-usage-monitor"] + "/vms/start/" + req.params._id,
     json: true
   };
 
@@ -126,7 +126,7 @@ router.put("/start", function(req, res) {
 });
 
 // PUT: Stop a VM
-router.put("/stop", function(req, res) {
+router.put("/stop/:_id", function(req, res) {
   // Build HTTP object
   var options = {};
 
@@ -136,7 +136,7 @@ router.put("/stop", function(req, res) {
   var options = {
     body: body,
     method: "PUT",
-    url: config["cloud-usage-monitor"] + "/vms/stop",
+    url: config["cloud-usage-monitor"] + "/vms/stop/" + req.params._id,
     json: true
   };
 

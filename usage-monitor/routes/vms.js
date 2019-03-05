@@ -2,7 +2,7 @@ var express = require("express");
 var router = express.Router();
 const Vm = require("../models/vm");
 
-// GET: return VMs for a user
+// GET: Return VMs for a user
 router.get("/", function(req, res) {
   Vm.find({ ccId: req.query.ccId }, (err, vm) => {
     if (err) {
@@ -49,17 +49,28 @@ router.post("/", function(req, res) {
   });
 });
 
-// PUT: start a VM
-router.put("/start", function(req, res) {
-  // -------------------- Talk to Mongo here --------------------
-
-  var response = {};
-  response.test = "start a vm";
-  res.send(response);
+// PUT: Start a VM
+router.put("/start/:_id", function(req, res) {
+  Vm.findOneAndUpdate(
+    { _id: req.params._id },
+    {
+      running: true,
+      $push: { usage: { startTime: new Date(), endTime: null } }
+    },
+    {
+      new: true
+    },
+    function(err, vm) {
+      if (err) {
+        res.send(err);
+      }
+      res.send(vm);
+    }
+  );
 });
 
 // PUT: Stop a VM
-router.put("/stop", function(req, res) {
+router.put("/stop/:_id", function(req, res) {
   // -------------------- Talk to Mongo here --------------------
 
   var response = {};
@@ -87,7 +98,7 @@ router.put("/downgrade/:_id", function(req, res) {
   });
 });
 
-// DELETE:
+// DELETE: Delete a VM
 router.delete("/:_id", function(req, res) {
   Vm.deleteOne({ _id: req.params._id }, function(err) {
     if (err) {
