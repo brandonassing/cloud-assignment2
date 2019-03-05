@@ -204,7 +204,7 @@ router.put("/downgrade", function(req, res) {
 });
 
 // DELETE:
-router.delete("/", function(req, res) {
+router.delete("/:_id", function(req, res) {
   // Build HTTP object
   var options = {};
 
@@ -214,7 +214,7 @@ router.delete("/", function(req, res) {
   var options = {
     body: body,
     method: "DELETE",
-    url: config["cloud-usage-monitor"] + "/vms",
+    url: config["cloud-usage-monitor"] + "/vms/" + req.params._id,
     json: true
   };
 

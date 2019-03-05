@@ -86,10 +86,14 @@ router.put("/downgrade", function(req, res) {
 });
 
 // DELETE:
-router.delete("/", function(req, res) {
-  var response = {};
-  response.test = "delete a vm";
-  res.send(response);
+router.delete("/:_id", function(req, res) {
+  console.log(req.params._id);
+  Vm.deleteOne({ _id: req.params._id }, function(err) {
+    if (err) {
+      res.send(err);
+    }
+    res.send({ _id: req.params._id });
+  });
 });
 
 module.exports = router;
