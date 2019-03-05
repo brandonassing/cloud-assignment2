@@ -30,7 +30,7 @@ router.get("/", function(req, res) {
 // });
 
 // POST: Create new VM
-router.post("/create", function(req, res) {
+router.post("/", function(req, res) {
   var vm = {
     name: req.body.name,
     ccId: req.body.ccId,
@@ -86,9 +86,7 @@ router.put("/downgrade", function(req, res) {
 });
 
 // DELETE:
-router.delete("/delete", function(req, res) {
-  // -------------------- Talk to Mongo here --------------------
-
+router.delete("/", function(req, res) {
   var response = {};
   response.test = "delete a vm";
   res.send(response);

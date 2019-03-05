@@ -29,52 +29,52 @@ router.get("/", function(req, res) {
   });
 });
 
-// Get: return the usage metrics for a vm
-router.get("/usage", function(req, res) {
-  // Build HTTP object
-  var options = {};
+// // Get: return the usage metrics for a vm
+// router.get("/usage", function(req, res) {
+//   // Build HTTP object
+//   var options = {};
 
-  var options = {
-    method: "GET",
-    url: config["cloud-usage-monitor"] + "/vms/usage",
-    json: true
-  };
+//   var options = {
+//     method: "GET",
+//     url: config["cloud-usage-monitor"] + "/vms/usage",
+//     json: true
+//   };
 
-  // Send HTTP object
-  request(options, function(error, response, body) {
-    if (error) {
-      res.status(500);
-      res.send("error yo");
-    } else {
-      res.send(body);
-    }
-  });
-});
+//   // Send HTTP object
+//   request(options, function(error, response, body) {
+//     if (error) {
+//       res.status(500);
+//       res.send("error yo");
+//     } else {
+//       res.send(body);
+//     }
+//   });
+// });
 
 // Get: retur the total charges for a vm
-router.get("/charges", function(req, res) {
-  // Build HTTP object
-  var options = {};
+// router.get("/charges", function(req, res) {
+//   // Build HTTP object
+//   var options = {};
 
-  var options = {
-    method: "GET",
-    url: config["cloud-usage-monitor"] + "/vms/charges",
-    json: true
-  };
+//   var options = {
+//     method: "GET",
+//     url: config["cloud-usage-monitor"] + "/vms/charges",
+//     json: true
+//   };
 
-  // Send HTTP object
-  request(options, function(error, response, body) {
-    if (error) {
-      res.status(500);
-      res.send("error yo");
-    } else {
-      res.send(body);
-    }
-  });
-});
+//   // Send HTTP object
+//   request(options, function(error, response, body) {
+//     if (error) {
+//       res.status(500);
+//       res.send("error yo");
+//     } else {
+//       res.send(body);
+//     }
+//   });
+// });
 
 // POST: Create new VM
-router.post("/create", function(req, res) {
+router.post("/", function(req, res) {
   // Build HTTP object
   var options = {};
 
@@ -84,7 +84,7 @@ router.post("/create", function(req, res) {
   var options = {
     body: body,
     method: "POST",
-    url: config["cloud-usage-monitor"] + "/vms/create",
+    url: config["cloud-usage-monitor"] + "/vms",
     json: true
   };
 
@@ -204,7 +204,7 @@ router.put("/downgrade", function(req, res) {
 });
 
 // DELETE:
-router.delete("/delete", function(req, res) {
+router.delete("/", function(req, res) {
   // Build HTTP object
   var options = {};
 
@@ -214,7 +214,7 @@ router.delete("/delete", function(req, res) {
   var options = {
     body: body,
     method: "DELETE",
-    url: config["cloud-usage-monitor"] + "/vms/delete",
+    url: config["cloud-usage-monitor"] + "/vms",
     json: true
   };
 
