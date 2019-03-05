@@ -15,21 +15,21 @@ class App extends Component {
   }
 
   componentDidMount() {
-    // fetch("/users")
-    //   .then(res => res.json())
-    //   .then(resJson => {
-    //     let loggedIn = false;
-    //     if (resJson.users.length != 0) {
-    //       resJson.users.forEach((user) => {
-    //         if (user.loggedIn) {
-    //           loggedIn = true;
-    //         }
-    //       });
-    //     }
-    //     this.setState({
-    //       isAuthenticated: loggedIn
-    //     });
-    //   });
+    fetch("/users")
+      .then(res => res.json())
+      .then(resJson => {
+        let loggedIn = false;
+        if (resJson.length !== 0) {
+          resJson.forEach((user) => {
+            if (user.loggedIn) {
+              loggedIn = true;
+            }
+          });
+        }
+        this.setState({
+          isAuthenticated: loggedIn
+        });
+      });
   }
 
   loggedIn = (auth) => {

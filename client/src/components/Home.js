@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import './Home.css';
 import Button from '@material-ui/core/Button';
-import { Link } from 'react-router-dom';
+// import { Link } from 'react-router-dom';
 import VM from './VM';
 import Usage from './Usage';
 import Modal from '@material-ui/core/Modal';
@@ -12,7 +12,7 @@ import moment from 'moment';
 
 // LEGACY REACT FUNC. USED BY UP/DOWNGRADE
 import update from 'react-addons-update';
-import { resetWarningCache } from 'prop-types';
+// import { resetWarningCache } from 'prop-types';
 
 class Home extends Component {
     constructor(props) {
