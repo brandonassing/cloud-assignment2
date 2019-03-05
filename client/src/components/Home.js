@@ -166,6 +166,7 @@ class Home extends Component {
                         vms: update(this.state.vms, { [indexChange]: { usage: { $set: resJson.usage }, running: { $set: resJson.running } } })
                     });
                 });
+
         }
     };
 
@@ -188,6 +189,7 @@ class Home extends Component {
                 this.setState({
                     vms: [...this.state.vms.slice(0, indexRemoved), ...this.state.vms.slice(indexRemoved + 1)]
                 });
+
             });
     };
 
@@ -239,6 +241,7 @@ class Home extends Component {
                     vms: update(this.state.vms, { [indexChange]: { tier: { $set: vmChange.tier } } })
                 });
             })
+
     };
 
     render() {
