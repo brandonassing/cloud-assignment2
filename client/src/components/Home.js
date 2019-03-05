@@ -45,6 +45,7 @@ class Home extends Component {
         });
     }
 
+    // TODO have refresh fetch all vms again and refresh everything
     refresh = () => {
         if (this.state.vms.length !== 0) {
             let charges = 0.00;
