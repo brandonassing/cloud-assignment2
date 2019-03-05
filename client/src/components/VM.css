@@ -81,6 +81,11 @@ button.vm-button.delete-button {
     background-color: rgb(182, 11, 11);
 }
 
+button.vm-button.delete-button:disabled {
+    background-color: rgba(182, 11, 11, 0.379);
+    color: rgba(80, 80, 80, 0.564);
+}
+
 #details-modal-body {
     background-color: rgb(23, 39, 45);
     width: 500px;
