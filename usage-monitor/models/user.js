@@ -3,18 +3,9 @@ var Schema = mongoose.Schema;
 
 var UserSchema = new Schema(
   {
-    username: {
-      type: String,
-      required: true
-    },
-    password: {
-      type: String,
-      required: true
-    },
-    loggedIn: {
-      type: Boolean,
-      default: false
-    }
+    username: String,
+    password: String,
+    loggedIn: Boolean
   },
   { versionKey: false }
 );

@@ -24,18 +24,15 @@ router.get("/", function(req, res) {
   });
 });
 
-// PUt: Login
+// PUT: Login
 router.put("/login", function(req, res) {
   // Build HTTP object
-  var options = {};
-
-  var body = {};
-  body.model = "a model";
+  var body = req.body;
 
   var options = {
     body: body,
     method: "PUT",
-    url: config["mongo-url"] + "optional",
+    url: config["cloud-usage-monitor"] + "/users/login",
     json: true
   };
 
@@ -43,7 +40,7 @@ router.put("/login", function(req, res) {
   request(options, function(error, response, body) {
     if (error) {
       res.status(500);
-      res.send("error yo");
+      res.send({ error: true, username: null });
     } else {
       res.send(body);
     }
