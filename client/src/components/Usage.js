@@ -51,36 +51,48 @@ class Usage extends Component {
                 let end = moment(new Date(this.state.endTime));
                 let minSum = 0;
                 
-                let vm = this.props.vms.find((item) => {
-                    return item.name = this.state.vm;
-                });
+                let vm;
+
+                for (let i = 0; i < this.props.vms.length; i++) {
+                    if (this.props.vms[i].name === this.state.vm) {
+                        vm = this.props.vms[i];
+                    }
+                }
     
                 vm.usage.forEach(usage => {
                     let usageEnd = usage.endTime === null ? moment(Date.now()) : moment(usage.endTime);
                     let usageStart = moment(usage.startTime);
+                    console.log(usageStart, start, usageEnd, end)
                     if (usageStart.isBefore(start)) {
                         if (usageEnd.isBefore(start)) {
+                            console.log(usageStart, start, usageEnd)
                             if (usageEnd.isBefore(end)) {
+                                console.log("start out : end in")
                                 // start out : end in
-                                minSum += moment.duration(moment(start).diff(moment(usageEnd))).asMinutes();
+                                minSum += moment.duration(moment(usageEnd).diff(moment(start))).asMinutes();
                             }
                             else {
+                                console.log("start out : end out")
                                 // start out : end out
-                                minSum += moment.duration(moment(start).diff(moment(end))).asMinutes();
+                                minSum += moment.duration(moment(end).diff(moment(start))).asMinutes();
                             }
                         }
                     }
                     else if (usageStart.isBefore(end)) {
                         if (usageEnd.isBefore(end)) {
+                            console.log("start in : end in")
                             // start in : end in
-                            minSum += moment.duration(moment(usageStart).diff(moment(usageEnd))).asMinutes();
+                            minSum += moment.duration(moment(usageEnd).diff(moment(usageStart))).asMinutes();
                         }
                         else {
+                            console.log("start in : end out")
                             // start in : end out
-                            minSum += moment.duration(moment(usageStart).diff(moment(end))).asMinutes();
+                            minSum += moment.duration(moment(end).diff(moment(usageStart))).asMinutes();
                         }
                     }
+                    console.log("1 ",minSum);
                 });
+                console.log("2 ", minSum);
                 let vmCharges = minSum * (vm.tier === 1 ? 0.05 : (vm.tier === 2 ? 0.1 : 0.15));
                 this.setState({
                     vmCharges: (Math.round(vmCharges * 100) / 100).toFixed(2)
