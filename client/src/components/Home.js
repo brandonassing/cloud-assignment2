@@ -307,7 +307,9 @@ class Home extends Component {
                     </div>
                 </nav>
                 <div id="home-main">
-                    <Usage charges={this.state.charges} />
+                    <Usage vms={this.state.vms} charges={this.state.charges} isTotal={true} />
+                    <Usage vms={this.state.vms} charges={this.state.charges} isTotal={false} />
+
                     <div id="home-grid">
                         {/* <div id="create-button-container" className="vm-body">
                         <Button classes={{ root: 'create-button' }}>

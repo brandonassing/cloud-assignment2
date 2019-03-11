@@ -15,3 +15,53 @@
 #usage-body > h2 > span {
     color: white;
 }
+
+#usage-selection {
+    margin-left: 200px;
+    margin-right: 200px;
+}
+
+#usage-time-fields {
+    display: flex;
+    justify-content: space-between;
+}
+
+#usage-time-fields > div {
+    width: 48%;
+}
+
+#vm-start-time, #vm-end-time {
+    color: rgb(208, 208, 208);
+}
+
+#usage-time-fields > div > div > div:after {
+    border-bottom: 2px solid rgb(208, 208, 208);
+}
+
+#usage-time-fields > div > div > label {
+    color: rgb(208, 208, 208);
+
+}
+
+#usage-vm-fields {
+    color: rgb(150, 150, 150);
+}
+
+#usage-vm-fields > div > h3 > #vm-name {
+    color: rgb(227, 0, 0);
+}
+
+#usage-vm-fields > div > h3 > #vm-charge {
+    color: white;
+}
+
+#vm-dropdown {
+    margin-top: 15px;
+    margin-bottom: 25px;
+}
+
+button.vm-button {
+    color: rgb(208, 208, 208);
+    background-color: rgba(0, 0, 0, 0.09);
+    padding: 15px;
+}
