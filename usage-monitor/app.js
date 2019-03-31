@@ -9,8 +9,13 @@ var mongoose = require("mongoose");
 var userRouter = require("./routes/users");
 var vmRouter = require("./routes/vms");
 
-const dbUri =
-  "mongodb://main:se4455@main-shard-00-00-gkrza.mongodb.net:27017,main-shard-00-01-gkrza.mongodb.net:27017,main-shard-00-02-gkrza.mongodb.net:27017/test?ssl=true&replicaSet=Main-shard-0&authSource=admin&retryWrites=true";
+// Cloud Assignment 2 link
+//const dbUri = "mongodb://main:se4455@main-shard-00-00-gkrza.mongodb.net:27017,main-shard-00-01-gkrza.mongodb.net:27017,main-shard-00-02-gkrza.mongodb.net:27017/test?ssl=true&replicaSet=Main-shard-0&authSource=admin&retryWrites=true";
+
+// Cloud assignment 3 link: 
+const dbUri = "mongodb://main:se4455@10.0.0.5:27017:27017/test?ssl=true&replicaSet=Main-shard-0&authSource=admin&retryWrites=true";
+
+
 
 const options = {
   dbName: "Main",
