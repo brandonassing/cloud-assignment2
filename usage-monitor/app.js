@@ -2,7 +2,7 @@ var createError = require("http-errors");
 var express = require("express");
 var path = require("path");
 var cookieParser = require("cookie-parser");
-var logger = require("morgan");
+var morgan = require("morgan");
 
 var mongoose = require("mongoose");
 
@@ -10,10 +10,10 @@ var userRouter = require("./routes/users");
 var vmRouter = require("./routes/vms");
 
 // Cloud Assignment 2 link
-//const dbUri = "mongodb://main:se4455@main-shard-00-00-gkrza.mongodb.net:27017,main-shard-00-01-gkrza.mongodb.net:27017,main-shard-00-02-gkrza.mongodb.net:27017/test?ssl=true&replicaSet=Main-shard-0&authSource=admin&retryWrites=true";
+const dbUri = "mongodb://main:se4455@main-shard-00-00-gkrza.mongodb.net:27017,main-shard-00-01-gkrza.mongodb.net:27017,main-shard-00-02-gkrza.mongodb.net:27017/test?ssl=true&replicaSet=Main-shard-0&authSource=admin&retryWrites=true";
 
 // Cloud assignment 3 link: 
-const dbUri = "mongodb://10.0.0.6:27017/Main";
+//const dbUri = "mongodb://10.0.0.6:27017/Main";
 
 
 
@@ -35,11 +35,18 @@ mongoose.connect(dbUri, options).then(
 
 var app = express();
 
+// Log all requests to the /log folder. 
+var fs = require('fs')
+app.use(morgan('common', {
+  stream: fs.createWriteStream(path.join(__dirname, '/log/access.log'), { flags: 'a' })
+}))
+
+
 // view engine setup
 app.set("views", path.join(__dirname, "views"));
 app.set("view engine", "jade");
 
-app.use(logger("dev"));
+//app.use(morgan("dev"));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
@@ -47,6 +54,13 @@ app.use(express.static(path.join(__dirname, "public")));
 
 app.use("/users", userRouter);
 app.use("/vms", vmRouter);
+
+
+// Setup request logging:
+
+
+
+
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
